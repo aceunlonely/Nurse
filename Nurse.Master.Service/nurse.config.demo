@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ConfigCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Configs>
+    <ConfigNode>
+      <!--服务唯一id，标识服务，日志中体现-->
+      <ID>1</ID>
+      <!--服务别名，或者进程名-->
+      <AppName>zjgl2_service</AppName>
+      <!--程序类型 1、服务2、exe-->
+      <AppType>1</AppType>
+      <!--程序目录，服务时 可空-->
+      <AppPath />
+      <!--守护类型 1：进程守护 2：心跳守护-->
+      <GuardType>1</GuardType>
+      <!--守护间隔-->
+      <GuardInternal>1000</GuardInternal>
+      <Remark>证件管理服务</Remark>
+      <Handles>
+        <HandleNode>
+          <!--状态 1、服务不可见  2、服务可见心脏停止跳动 3、服务进程停止-->
+          <Condition>1</Condition>
+          <!--说明,没有特殊用途-->
+          <Desc>服务不可见</Desc>
+          <!--处理计划 1、停止服务或者进程  2、重启服务或者进程 3、等待Count满之后重启-->
+          <Plan>1</Plan>
+          <!--计数，plan为3时，进行等待重启-->
+          <Count>3</Count>
+        </HandleNode>
+        <HandleNode>
+          <Condition>2</Condition>
+          <Desc>心跳停止</Desc>
+          <Plan>2</Plan>
+          <Count>5</Count>
+        </HandleNode>
+      </Handles>
+    </ConfigNode>
+    <ConfigNode>
+      <ID>2</ID>
+      <AppName>test.exe</AppName>
+      <AppType>2</AppType>
+      <AppPath>D:/test.exe</AppPath>
+      <GuardType>2</GuardType>
+      <GuardInternal>2000</GuardInternal>
+      <Remark>测试使用</Remark>
+      <Handles>
+        <HandleNode>
+          <Condition>1</Condition>
+          <Desc>服务不可见</Desc>
+          <Plan>1</Plan>
+          <Count>3</Count>
+        </HandleNode>
+        <HandleNode>
+          <Condition>2</Condition>
+          <Desc>心跳停止</Desc>
+          <Plan>2</Plan>
+          <Count>5</Count>
+        </HandleNode>
+      </Handles>
+    </ConfigNode>
+  </Configs>
+</ConfigCollection>

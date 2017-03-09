@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ConfigCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Configs>
+    <ConfigNode>
+      <ID>1</ID>
+      <AppName>Nurse.Test.Exe</AppName>
+      <!--程序类型 1、服务2、exe-->
+      <AppType>2</AppType>
+      <!--程序目录，服务时 可空-->
+      <AppPath>F:\workspace\csharp\Nurse\SubProgram\Nurse.Test.Exe\bin\Debug\Nurse.Test.Exe.exe</AppPath>
+      <!--守护类型 1：进程守护 2：心跳守护-->
+      <GuardType>2</GuardType>
+      <!--守护间隔-->
+      <GuardInternal>15000</GuardInternal>
+      <Remark>测试进程exe</Remark>
+      <Handles>
+        <HandleNode>
+          <Condition>2</Condition>
+          <Desc>心跳停止</Desc>
+          <Plan>3</Plan>
+          <Count>5</Count>
+        </HandleNode>
+        <HandleNode>
+          <Condition>3</Condition>
+          <Desc>进程停止</Desc>
+          <Plan>2</Plan>
+          <Count>3</Count>
+        </HandleNode>
+      </Handles>
+    </ConfigNode>
+    <ConfigNode>
+      <ID>2</ID>
+      <AppName>Nurse.Test.Service</AppName>
+      <AppType>1</AppType>
+      <AppPath>D:/test.exe</AppPath>
+      <GuardType>2</GuardType>
+      <GuardInternal>16000</GuardInternal>
+      <Remark>服务进程监控</Remark>
+      <Handles>
+        <HandleNode>
+          <Condition>2</Condition>
+          <Desc>心跳停止</Desc>
+          <Plan>3</Plan>
+          <Count>5</Count>
+        </HandleNode>
+        <HandleNode>
+          <Condition>3</Condition>
+          <Desc>进程停止</Desc>
+          <Plan>2</Plan>
+          <Count>3</Count>
+        </HandleNode>
+      </Handles>
+    </ConfigNode>
+  </Configs>
+</ConfigCollection>
