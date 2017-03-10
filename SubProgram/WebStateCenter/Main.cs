@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 
@@ -11,6 +12,22 @@ namespace WebStateCenter
         private readonly static ConcurrentDictionary<string, DateTime> dic = new ConcurrentDictionary<string, DateTime>();
 
         private readonly static ConcurrentDictionary<string, DateTime> innerBeatdic = new ConcurrentDictionary<string, DateTime>();
+
+        public static List<ServiceState> GetServiceState()
+        {
+            List<ServiceState> arrR = new List<ServiceState>();
+
+            foreach (string key in dic.Keys)
+            {
+                arrR.Add(new ServiceState()
+                {
+                    Name = key,
+                    LastBeatTime = GetBeatTime(key),
+                    LinkState = IsAlved(key) ? "连接" : "断开"
+                });
+            }
+            return arrR;
+        }
 
         /// <summary>
         /// 获取心跳时间
@@ -60,9 +77,9 @@ namespace WebStateCenter
         /// <param name="key"></param>
         /// <returns></returns>
         public static bool IsAlved(string key)
-        { 
+        {
             //无key时，直接任务是没有或者
-            if(innerBeatdic.ContainsKey(key)==false)
+            if (innerBeatdic.ContainsKey(key) == false)
             {
                 return false;
             }
@@ -75,5 +92,15 @@ namespace WebStateCenter
         }
 
 
+    }
+
+
+    public class ServiceState
+    {
+        public string Name { get; set; }
+
+        public string LastBeatTime { get; set; }
+
+        public string LinkState { get; set; }
     }
 }

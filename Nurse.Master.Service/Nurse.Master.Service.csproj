@@ -76,6 +76,7 @@
     <None Include="nurse.config.debug1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="nurse.config.real" />
     <None Include="Refs\nurse.config.demo">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ConfigCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Configs>
+    <ConfigNode>
+      <!--服务唯一id，标识服务，日志中体现-->
+      <ID>1</ID>
+      <!--服务别名，或者进程名-->
+      <AppName>EmsService</AppName>
+      <!--程序类型 1、服务2、exe-->
+      <AppType>1</AppType>
+      <!--程序目录，服务时 可空-->
+      <AppPath />
+      <!--守护类型 1：进程守护 2：心跳守护-->
+      <GuardType>2</GuardType>
+      <!--守护间隔-->
+      <GuardInternal>60000</GuardInternal>
+      <Remark>报文接收服务</Remark>
+      <Handles>
+        <HandleNode>
+          <Condition>2</Condition>
+          <Desc>心跳停止</Desc>
+	  <Plan>3</Plan>
+          <Count>2</Count>
+  	</HandleNode>
+  	<HandleNode>
+          <Condition>3</Condition>
+          <Desc>服务停止时</Desc>
+	  <Plan>3</Plan>
+          <Count>1</Count>
+        </HandleNode>
+      </Handles>
+    </ConfigNode>
+    <ConfigNode>
+      <!--服务唯一id，标识服务，日志中体现-->
+      <ID>2</ID>
+      <!--服务别名，或者进程名-->
+      <AppName>YTHSendService</AppName>
+      <!--程序类型 1、服务2、exe-->
+      <AppType>1</AppType>
+      <!--程序目录，服务时 可空-->
+      <AppPath />
+      <!--守护类型 1：进程守护 2：心跳守护-->
+      <GuardType>2</GuardType>
+      <!--守护间隔-->
+      <GuardInternal>60000</GuardInternal>
+      <Remark>报文发送服务</Remark>
+      <Handles>
+        <HandleNode>
+          <Condition>2</Condition>
+          <Desc>心跳停止</Desc>
+	  <Plan>3</Plan>
+          <Count>2</Count>
+  	</HandleNode>
+  	<HandleNode>
+          <Condition>3</Condition>
+          <Desc>服务停止时</Desc>
+	  <Plan>3</Plan>
+          <Count>1</Count>
+        </HandleNode>
+      </Handles>
+    </ConfigNode>
+     <ConfigNode>
+      <!--服务唯一id，标识服务，日志中体现-->
+      <ID>3</ID>
+      <!--服务别名，或者进程名-->
+      <AppName>EmsService2</AppName>
+      <!--程序类型 1、服务2、exe-->
+      <AppType>1</AppType>
+      <!--程序目录，服务时 可空-->
+      <AppPath />
+      <!--守护类型 1：进程守护 2：心跳守护-->
+      <GuardType>2</GuardType>
+      <!--守护间隔-->
+      <GuardInternal>60000</GuardInternal>
+      <Remark>报文发送服务</Remark>
+      <Handles>
+        <HandleNode>
+          <Condition>2</Condition>
+          <Desc>心跳停止</Desc>
+	  <Plan>3</Plan>
+          <Count>2</Count>
+  	</HandleNode>
+  	<HandleNode>
+          <Condition>3</Condition>
+          <Desc>服务停止时</Desc>
+	  <Plan>3</Plan>
+          <Count>1</Count>
+        </HandleNode>
+      </Handles>
+    </ConfigNode>
+     <ConfigNode>
+      <!--服务唯一id，标识服务，日志中体现-->
+      <ID>4</ID>
+      <!--服务别名，或者进程名-->
+      <AppName>YTHSendService2</AppName>
+      <!--程序类型 1、服务2、exe-->
+      <AppType>1</AppType>
+      <!--程序目录，服务时 可空-->
+      <AppPath />
+      <!--守护类型 1：进程守护 2：心跳守护-->
+      <GuardType>2</GuardType>
+      <!--守护间隔-->
+      <GuardInternal>60000</GuardInternal>
+      <Remark>报文发送服务</Remark>
+      <Handles>
+        <HandleNode>
+          <Condition>2</Condition>
+          <Desc>心跳停止</Desc>
+	  <Plan>3</Plan>
+          <Count>2</Count>
+  	</HandleNode>
+  	<HandleNode>
+          <Condition>3</Condition>
+          <Desc>服务停止时</Desc>
+	  <Plan>3</Plan>
+          <Count>1</Count>
+        </HandleNode>
+      </Handles>
+    </ConfigNode>
+  </Configs>
+</ConfigCollection>
