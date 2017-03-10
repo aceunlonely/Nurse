@@ -55,6 +55,10 @@
       <Project>{06bdba72-2379-47f6-8c05-f73ae90a5c5a}</Project>
       <Name>Nurse.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SubProgram\WebStateCenter\WebStateCenter.csproj">
+      <Project>{277c7d21-384c-4b38-b090-7571ef49fc97}</Project>
+      <Name>WebStateCenter</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

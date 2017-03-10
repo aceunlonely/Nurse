@@ -15,6 +15,7 @@
                 ForeColor="#333333">
                 <FooterStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
                 <Columns>
+                    <asp:BoundField DataField="ServerMac"  HeaderText ="服务器Mac地址" />
                     <asp:BoundField DataField="Name" HeaderText="服务名" ReadOnly="True" />
                     <asp:BoundField DataField="LastBeatTime" HeaderText="上一次心跳时间" />
                     <asp:BoundField DataField="LinkState" HeaderText="连接状态" />

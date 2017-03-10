@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web;
+using WebStateCenter.DDD;
 
 namespace WebStateCenter
 {
@@ -19,9 +20,22 @@ namespace WebStateCenter
 
             foreach (string key in dic.Keys)
             {
+                string strServerMac = "";
+                string strName = key;
+                foreach (string code in MapManager.Map.Keys)
+                {
+                    if (key.EndsWith(code))
+                    {
+                        int length = code.Length;
+                        strServerMac = key.Substring(0, key.Length - length - 1);
+                        strName = MapManager.Map[code];
+                        break;
+                    }
+                }
                 arrR.Add(new ServiceState()
                 {
-                    Name = key,
+                    ServerMac = strServerMac,
+                    Name = strName,
                     LastBeatTime = GetBeatTime(key),
                     LinkState = IsAlved(key) ? "连接" : "断开"
                 });

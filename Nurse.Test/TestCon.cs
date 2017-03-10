@@ -9,6 +9,7 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using WebStateCenter.DDD;
 
 namespace Nurse.Test
 {
@@ -21,11 +22,33 @@ namespace Nurse.Test
             //TestCloseProcess();
             //TestExsitProcess();
             //TestStartProcess();
-            TestService();
+            //TestService();
 
             //TestConfig();
 
             //TestWebStateCenter();
+
+            //TestWebConfig();
+            //TestReadWebConfig();
+
+        }
+
+        public void TestReadWebConfig()
+        {
+            string strPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "map.config.demo");
+            var entity =XmlHelper.Xml2Entity(strPath, new MapCollection().GetType());
+
+        }
+
+        public void TestWebConfig()
+        {
+            MapCollection mc = new MapCollection();
+            mc.Nodes = new List<Map>();
+            mc.Nodes.Add(new Map() { Code = "Nurse.Test.Exe", Name = "护士测试exe" });
+            mc.Nodes.Add(new Map() { Code = "Nurse.Test.Service", Name = "护士测试Service" });
+
+            string strPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "map.config.demo");
+            XmlHelper.Enity2Xml(strPath, mc);
         }
 
         public void TestWebStateCenter()
