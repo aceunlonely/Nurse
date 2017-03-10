@@ -97,6 +97,8 @@ namespace WebStateCenter
 
     public class ServiceState
     {
+        public string ServerMac { get; set; }
+
         public string Name { get; set; }
 
         public string LastBeatTime { get; set; }

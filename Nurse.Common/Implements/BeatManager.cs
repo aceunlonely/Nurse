@@ -82,7 +82,7 @@ namespace Nurse.Common.Implements
             DLog log = new DLog();
             log.Init("beat", "beat/log");
 
-            IStateCenterConnector connector = StateCenterConnectorFactory.GetDefaultConnector();
+
 
             if (string.IsNullOrEmpty(AppName))
             {
@@ -93,22 +93,30 @@ namespace Nurse.Common.Implements
             while (RecycleRunState)
             {
                 log.Info("开始一次心跳");
-                try
+                IStateCenterConnector connector = StateCenterConnectorFactory.GetAvailableConnector();
+                if (connector == null)
                 {
-                    //不管有没有值，都发送到远端
-                    log.Info("发送到远端" + beatName);
-                    if (connector.Beat(beatName, LastBeatTime))
-                    {
-                        log.Info("发送成功");
-                    }
-                    else
-                    {
-                        log.Error("发送失败");
-                    }
+                    log.Error("没有找到可用的状态中心连接器");
                 }
-                catch (Exception ex)
+                else
                 {
-                    log.Error("心跳出错：" + ex.ToString());
+                    try
+                    {
+                        //不管有没有值，都发送到远端
+                        log.Info("发送到远端" + beatName);
+                        if (connector.Beat(beatName, LastBeatTime))
+                        {
+                            log.Info("发送成功");
+                        }
+                        else
+                        {
+                            log.Error("发送失败");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        log.Error("心跳出错：" + ex.ToString());
+                    }
                 }
                 Thread.Sleep(CommonConfig.BeatInternal);
             }

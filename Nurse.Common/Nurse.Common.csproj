@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -60,6 +61,7 @@
     <Compile Include="helper\ServiceManger.cs" />
     <Compile Include="helper\XmlHelper.cs" />
     <Compile Include="Implements\BeatManager.cs" />
+    <Compile Include="Implements\DiskConnector.cs" />
     <Compile Include="Implements\StateCenterConnectorFactory.cs" />
     <Compile Include="Implements\WebConnector.cs" />
     <Compile Include="Interface\IStateCenterConnector.cs" />

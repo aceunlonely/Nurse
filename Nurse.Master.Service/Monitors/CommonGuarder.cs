@@ -99,8 +99,8 @@ namespace Nurse.Master.Service.Monitors
                     try
                     {
                         log.Info("开始检测状态中心健康情况");
-                        IStateCenterConnector connector = StateCenterConnectorFactory.GetDefaultConnector();
-                        if (!connector.IsCenterAlived())
+                        IStateCenterConnector connector = StateCenterConnectorFactory.GetAvailableConnector();
+                        if (connector == null || !connector.IsCenterAlived())
                         {
                             log.Error("状态中心无法连接，开始处理错误：");
                             _appErrExecutor.HandleError(Enums.EnumHandleCondition.服务不可见, _config, LastStateCenterTime);
@@ -127,7 +127,6 @@ namespace Nurse.Master.Service.Monitors
                         }
                         else
                         {
-                            
                             //首次心跳
                             if (LastBeatTime == null)
                             {
