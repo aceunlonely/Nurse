@@ -36,7 +36,6 @@ namespace WebStateCenter.DDD
                 return _map;
             }
         }
-        
         //Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "map.config.demo");
     }
 }

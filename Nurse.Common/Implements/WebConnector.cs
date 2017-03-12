@@ -146,5 +146,31 @@ namespace Nurse.Common.Implements
                 wc.Dispose();
             }
         }
+
+
+        public string SendMsg(string type, string msg)
+        {
+            WebClient wc = new WebClient();
+            if (string.IsNullOrEmpty(CommonConfig.WebStateCenterUrl))
+            {
+                throw new Exception("未配置节点：WebStateCenterUrl");
+            }
+            try
+            {
+                Byte[] pageData = wc.DownloadData(CommonConfig.WebStateCenterUrl + "?op=sendMsg&key=" + EncodeHelper.UrlEncode(type) + "&val=" + EncodeHelper.UrlEncode(msg));
+                string result = Encoding.Default.GetString(pageData);  //如果获取网站页面采用的是GB2312，则使用这句 
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                CommonLog.InnerErrorLog.Error("访问站点出错:" + CommonConfig.WebStateCenterUrl + "?op=sendMsg&key=" + EncodeHelper.UrlEncode(type) + "&val=" + EncodeHelper.UrlEncode(msg) + "  |" + ex.ToString());
+                return string.Empty;
+            }
+            finally
+            {
+                wc.Dispose();
+            }
+        }
     }
 }

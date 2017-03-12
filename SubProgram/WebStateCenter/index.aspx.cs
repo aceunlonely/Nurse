@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Nurse.Common.helper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using WebStateCenter.DDD;
 
 namespace WebStateCenter
 {
@@ -15,6 +17,38 @@ namespace WebStateCenter
 
             gv.DataSource = MainExe.GetServiceState();
             gv.DataBind();
+
+            string mq = MainExe.GetMsg("msmq");
+            if (string.IsNullOrEmpty(mq) == false)
+            {
+                string[] rows = mq.Split(new char[] { '|' });
+                List<MqCount> mcs = new List<MqCount>();
+                foreach (string row in rows)
+                {
+                    
+                    if (string.IsNullOrEmpty(row) == false)
+                    {
+                        string[] fileds = row.Split(new char[] { '@' });
+                        if (fileds.Length > 2)
+                        {
+                            mcs.Add(new MqCount()
+                            {
+                                Name = fileds[0],
+                                Count = fileds[1],
+                                Remark = fileds[2]
+                            });
+                        }
+                    }
+
+                    if (mcs.Count > 0)
+                    {
+                        gvMq.DataSource = mcs;
+                        gvMq.DataBind();
+                        
+                    }
+                }
+            }
+
         }
     }
 }

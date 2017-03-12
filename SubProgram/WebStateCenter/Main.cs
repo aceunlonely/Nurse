@@ -14,6 +14,32 @@ namespace WebStateCenter
 
         private readonly static ConcurrentDictionary<string, DateTime> innerBeatdic = new ConcurrentDictionary<string, DateTime>();
 
+        private readonly static ConcurrentDictionary<string, string> innerMsg = new ConcurrentDictionary<string, string>();
+
+        /// <summary>
+        /// 发送消息
+        /// </summary>
+        /// <param name="type">类型</param>
+        /// <param name="val">值</param>
+        public static void SendMsg(string type, string val)
+        {
+            innerMsg.AddOrUpdate(type, val, (k, v) => val);
+        }
+
+        /// <summary>
+        /// 获取消息
+        /// </summary>
+        /// <param name="type">类型</param>
+        /// <returns></returns>
+        public static string GetMsg(string type)
+        {
+            if (innerMsg.ContainsKey(type))
+            {
+                return innerMsg[type];
+            }
+            return string.Empty;
+        }
+
         public static List<ServiceState> GetServiceState()
         {
             List<ServiceState> arrR = new List<ServiceState>();

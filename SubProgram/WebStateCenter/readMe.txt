@@ -1,6 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
-<MapCollection xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Nodes>
+﻿配置
+map.config
+
+配置服务名映射表：
+<Nodes>
     <Map>
       <Code>Nurse.Test.Exe</Code>
       <Name>护士测试exe</Name>
@@ -11,4 +13,9 @@
     </Map>
   </Nodes>
 
-</MapCollection>
+  配置监控的mq：
+
+ <MQ>
+    <string>xyliu\private$\lxy</string>
+    <string>xyliu\private$\lxy2</string>
+  </MQ>

@@ -142,5 +142,11 @@ namespace Nurse.Common.Implements
         {
             return key.Replace(":", "");
         }
+
+        public string SendMsg(string type, string msg)
+        {
+            // do nothin
+            return string.Empty;
+        }
     }
 }

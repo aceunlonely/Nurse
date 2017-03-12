@@ -38,5 +38,13 @@ namespace Nurse.Common.Interface
         /// <param name="key">主键</param>
         /// <returns></returns>
         bool IsClientAlived(string key);
+
+        /// <summary>
+        /// 发送消息
+        /// </summary>
+        /// <param name="type">消息类型</param>
+        /// <param name="msg">消息</param>
+        /// <returns></returns>
+        string SendMsg(string type,string msg);
     }
 }

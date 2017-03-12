@@ -39,7 +39,7 @@ namespace Nurse.Master.Service
             Common.IsRun = false;
 
             if (Config.IsAlwaysRun == false)
-            { 
+            {
                 //关闭slave进程
                 if (ProcessHelper.ExistProcess("Nurse.Slave"))
                 {
@@ -56,8 +56,10 @@ namespace Nurse.Master.Service
         {
             //仆人监控开始
             SlaveGuarder.StartRun();
-            // 读取配置
+            // 一般监控
+            #region 服务和exe监控
             var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "nurse.config");
+
             if (File.Exists(path) == false)
             {
                 log.Info("程序未能找到配置文件: " + path);
@@ -94,7 +96,28 @@ namespace Nurse.Master.Service
                     }
                 }
             }
+            #endregion
 
+            //监控msmq
+            var mqConfig = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "mq.config");
+            if (File.Exists(mqConfig) == false)
+            {
+                log.Info("程序未能找到配置文件: " + mqConfig);
+            }
+            else
+            {
+                MSMQConfig msmqConfig = null;
+                try
+                {
+                    msmqConfig = XmlHelper.Xml2Entity(mqConfig, new MSMQConfig().GetType()) as MSMQConfig;
+                    log.Info("程序开始mq监控: " + mqConfig);
+                    MSMQMonitor.StartRun(msmqConfig.Nodes);
+                }
+                catch (Exception ex)
+                {
+                    log.Error("加载msmq过程中出错误：" + ex.ToString());
+                }
+            }
         }
     }
 }

@@ -22,4 +22,6 @@ Nurse.Master.Service 部署说明：
 	请确保服务器存在D盘， 如果d盘不存在，请配置DiskStateCenterPath
 	nurse.config添加配置（根据实际配置,配置说明参考nurse.config.demo）
 
+	mq.config 添加配置
+
 	设置为开机启动

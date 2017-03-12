@@ -18,6 +18,7 @@ namespace Nurse.Test
 
             new TestLog().Test();
             new TestCon().Test();
+            new TestMq().Test();
 
             Console.WriteLine("测试方法运行时间：" + watch1.Elapsed);
             Console.Read();

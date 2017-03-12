@@ -30,7 +30,7 @@ namespace Nurse.Master.Service.Monitors
         private static void RecycleGuard()
         {
             string strSlaveName = "Nurse.Slave";
-            while (Config.IsAlwaysRun && Common.IsRun)
+            while (Common.IsRun)
             {
                 try
                 {

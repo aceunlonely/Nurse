@@ -47,6 +47,7 @@ namespace Nurse.Test
             mc.Nodes.Add(new Map() { Code = "Nurse.Test.Exe", Name = "护士测试exe" });
             mc.Nodes.Add(new Map() { Code = "Nurse.Test.Service", Name = "护士测试Service" });
 
+
             string strPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "map.config.demo");
             XmlHelper.Enity2Xml(strPath, mc);
         }

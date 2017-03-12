@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MSMQConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Nodes>
+    <string>xyliu\private$\lxy</string>
+    <string>xyliu\private$\lxy2</string>
+  </Nodes>
+</MSMQConfig>

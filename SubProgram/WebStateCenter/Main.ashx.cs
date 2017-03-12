@@ -45,6 +45,10 @@ namespace WebStateCenter
                     case "isKeyAlived":
                         Return(context, MainExe.IsAlved(strKey) ? "1" : "0");
                         break;
+                    case "sendMsg":
+                        MainExe.SendMsg(strKey, strVal);
+                        Return(context, "1");
+                        break;
                 }
             }
 
