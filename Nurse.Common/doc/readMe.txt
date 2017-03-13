@@ -1,8 +1,8 @@
 ﻿业务心跳开发：
+	引入对应CPU架构的Nurse.Common.dll
 	业务代码关键逻辑处添加 BeatManger.Beat()
 
 业务心跳部署配置：
-
 	appsetting中添加节点
 		WebStateCenterUrl  ： stateCenter的url
 		BeatAppName ： 服务名 ，或者 EXE名
@@ -10,17 +10,25 @@
 
 WebStateCenter 部署说明：
 	直接部署
-
+	map.config 配置： (用于映射服务在监控页面上的显示名称，详细参考map.config.demo)
+		节点Code 对应监控中的服务名
+		节点Name 对应需要在index.aspx页面中显示的服务中文名称
+	验证URL：
+		http://localhost/WebStateCenter/index.aspx
+		http://localhost/WebStateCenter/main.ashx
 Nurse.Master.Service 部署说明：
-	appsetting中添加节点
-		IsAlwaysRun ： 是否一直运行， 如果开启，就master和slave相互守护
+	appsetting中添加节点 (即Nurse.Master.Service.exe.config中配置)
+		IsAlwaysRun ： 是否一直运行， 如果开启，就master和slave相互守护，不能被终止
 		Internal ： 通用间隔
 		Internal_Check_Slave ： master 检查slave的间隔 （默认值就是Internal）
-		WebStateCenterUrl  ： stateCenter的url
-
+		WebStateCenterUrl  ： WebStateCenter的url
 	请确保服务器存在D盘， 如果d盘不存在，请配置DiskStateCenterPath
-	nurse.config添加配置（根据实际配置,配置说明参考nurse.config.demo）
+	nurse.config添加配置，用于配置监控的服务及处理策略（根据实际配置,配置说明参考nurse.config.demo）
+	mq.config 添加配置，用于mq通道深度监控（根据实际配置，配置说明参考mq.config.demo
+		其中ConfigDomain/Name 为主机配置别名，随意起名
+		ConfigDomain/Value为“192.168.10.228|WORKGROUP|administrator|dcjet@888”的加密字符串
+					加密方式采用apollo的密码工具：PasswordTool.exe
+		MSMQConfigNode/Instance 为msmq的实例名，参考格式：highvertest\private$\tx1
+		MSMQConfigNode/Domain 对应ConfigDomain/Name，空值时，表明是本机的mq服务
 
-	mq.config 添加配置
-
-	设置为开机启动
+	服务设置为开机自动启动
