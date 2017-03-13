@@ -1,4 +1,5 @@
 ﻿using Nurse.Common;
+using Nurse.Common.DDD;
 using Nurse.Common.helper;
 using Nurse.Common.Implements;
 using Nurse.Common.Interface;
@@ -15,12 +16,12 @@ namespace Nurse.Master.Service.Monitors
     {
         private static Thread thread;
 
-        private static List<string> _msConfigList;
+        private static MSMQConfig _config;
         private MSMQMonitor() { }
 
-        public static void StartRun(List<string> list)
+        public static void StartRun(MSMQConfig config)
         {
-            _msConfigList = list;
+            _config = config;
             if (thread == null)
             {
                 thread = new Thread(new ThreadStart(RecycleGuard));
@@ -36,7 +37,7 @@ namespace Nurse.Master.Service.Monitors
                 try
                 {
                     //获取所有监控状态
-                    List<MqCount> list = MSMQHelper.GetMqCount(_msConfigList);
+                    List<MqCount> list = MSMQHelper.GetMqCount(_config);
 
                     if (list != null && list.Count > 0)
                     {

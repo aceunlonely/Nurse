@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <MSMQConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Domains>
+    <ConfigDomain>
+      <Name>228</Name>
+      <Value>ESvKEYyK/iZYFW2Zj16BRvdWGjElI+j75K5CLvjfMKgeIl0pvMRcvXWKU/roIuQNV37DiFNdhErwk7YWtXuL7AIn8z+4V6NFHLTLkwn8XsatMhL5OSsvzwAupJuzhbuJEHOINdRDopQ=</Value>
+    </ConfigDomain>
+  </Domains>
   <Nodes>
-    <string>xyliu\private$\lxy</string>
-    <string>xyliu\private$\lxy2</string>
+    <MSMQConfigNode>
+      <Instance>xyliu\private$\lxy</Instance>
+      <Domain />
+    </MSMQConfigNode>
+    <MSMQConfigNode>
+      <Instance>highvertest\private$\tx1</Instance>
+      <Domain>228</Domain>
+    </MSMQConfigNode>
   </Nodes>
 </MSMQConfig>

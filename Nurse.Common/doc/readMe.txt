@@ -11,7 +11,6 @@
 WebStateCenter 部署说明：
 	直接部署
 
-
 Nurse.Master.Service 部署说明：
 	appsetting中添加节点
 		IsAlwaysRun ： 是否一直运行， 如果开启，就master和slave相互守护

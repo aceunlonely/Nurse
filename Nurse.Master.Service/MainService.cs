@@ -111,7 +111,7 @@ namespace Nurse.Master.Service
                 {
                     msmqConfig = XmlHelper.Xml2Entity(mqConfig, new MSMQConfig().GetType()) as MSMQConfig;
                     log.Info("程序开始mq监控: " + mqConfig);
-                    MSMQMonitor.StartRun(msmqConfig.Nodes);
+                    MSMQMonitor.StartRun(msmqConfig);
                 }
                 catch (Exception ex)
                 {

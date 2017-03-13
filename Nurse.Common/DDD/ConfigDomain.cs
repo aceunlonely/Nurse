@@ -6,9 +6,10 @@ using System.Text;
 namespace Nurse.Common.DDD
 {
     [Serializable]
-    public class MSMQConfig
+    public class ConfigDomain
     {
-        public List<ConfigDomain> Domains { get; set; }
-        public List<MSMQConfigNode> Nodes { get; set; }
+        public string Name { get; set; }
+
+        public string Value { get; set; }
     }
 }
