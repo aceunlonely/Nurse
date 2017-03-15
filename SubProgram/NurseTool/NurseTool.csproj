@@ -48,9 +48,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="mq.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="readMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Nurse.Common\Nurse.Common.csproj">
+      <Project>{06bdba72-2379-47f6-8c05-f73ae90a5c5a}</Project>
+      <Name>Nurse.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

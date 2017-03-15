@@ -1,4 +1,5 @@
 ﻿using Dcjet.Framework.Helpers;
+using Nurse.Common.CM;
 using Nurse.Common.DDD;
 using PerformanceReader;
 using System;
@@ -35,7 +36,7 @@ namespace Nurse.Common.helper
                 }
                 catch (Exception ex)
                 {
-                    remark = "节点获取异常";
+                    remark = "节点获取异常" + (CommonConfig.IsDebug ? ex.ToString() : "");
                 }
                 arrResult.Add(new MqCount()
                 {
@@ -90,7 +91,7 @@ namespace Nurse.Common.helper
                     }
                     catch (Exception ex)
                     {
-                        remark = "节点获取异常";
+                        remark = "节点获取异常" + (CommonConfig.IsDebug ? ex.ToString() : "");
                     }
                     arrMqCount.Add(new MqCount()
                     {

@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Nurse.Common.DDD;
+using Nurse.Common.helper;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Messaging;
 using System.Text;
@@ -30,11 +33,30 @@ namespace NurseTool
                 case "msallcount":
                     TestAllCount();
                     break;
+                case "msconfig":
+
+                    var mqConfig = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "mq.config");
+                    if (File.Exists(mqConfig) == false)
+                    {
+                        Console.WriteLine("找不到" + mqConfig);
+                    }
+                    else
+                    {
+                        MSMQConfig msmqConfig = null;
+                        msmqConfig = XmlHelper.Xml2Entity(mqConfig, new MSMQConfig().GetType()) as MSMQConfig;
+                        List<MqCount> list = MSMQHelper.GetMqCount(msmqConfig);
+                        foreach (MqCount mc in list)
+                        {
+                            Console.WriteLine(string.Format(" {0} | {1} | {2}",mc.Name,mc.Count,mc.Remark));
+                        }
+                    }
+                    break;
                 default:
                     Console.WriteLine("nothing todo ");
                     break;
 
             }
+            Console.Read();
 
         }
 

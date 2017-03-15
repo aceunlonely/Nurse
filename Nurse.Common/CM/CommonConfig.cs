@@ -9,6 +9,7 @@ namespace Nurse.Common.CM
 {
     public class CommonConfig
     {
+        public static bool IsDebug { get { return ConfigureHelper.GetConfigureBoolValue("IsDebug", false); } }
         /// <summary>
         /// ConnectorType
         /// </summary>

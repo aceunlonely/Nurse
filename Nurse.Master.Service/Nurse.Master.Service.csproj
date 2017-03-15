@@ -70,6 +70,7 @@
     <None Include="App.config" />
     <None Include="mq.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
     <None Include="mq.config.demo">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
