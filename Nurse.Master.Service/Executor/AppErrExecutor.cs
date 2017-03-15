@@ -30,6 +30,14 @@ namespace Nurse.Master.Service.Executor
         private int Count = 0;
 
         /// <summary>
+        /// 重置状态
+        /// </summary>
+        public void ResetState()
+        {
+            Count = 0;
+        }
+
+        /// <summary>
         /// 处理错误
         /// </summary>
         /// <param name="condition">条件</param>
@@ -68,7 +76,7 @@ namespace Nurse.Master.Service.Executor
                         {
                             Log.Info("开始重启");
                             RebootNode(config);
-                            Count = 0;
+                            ResetState();
                         }
                         else
                         {
@@ -122,7 +130,7 @@ namespace Nurse.Master.Service.Executor
                 {
                     //先停止服务
                     sm.StopService(node.AppName);
-                    Log.Info("先关闭服务:"  + node.AppName + "  ...");
+                    Log.Info("先关闭服务:" + node.AppName + "  ...");
                     Thread.Sleep(500);
                     Log.Info("  开始开启服务:");
                     sm.StartService(node.AppName);
@@ -146,7 +154,41 @@ namespace Nurse.Master.Service.Executor
         /// <param name="node"></param>
         private void CloseNode(ConfigNode node)
         {
-            //nothing to do
+            if (node.AppType == (int)Enums.EnumAppType.可执行程序)
+            {
+                if (ProcessHelper.ExistProcess(node.AppName))
+                {
+                    Log.Info("停掉进程:" + node.AppName);
+                    ProcessHelper.CloseProcess(node.AppName);
+                }
+                else
+                {
+                    Log.Info("进程:" + node.AppName + " 本停止，不做操作");
+                }
+            }
+            else
+            {
+                ServiceManger sm = new ServiceManger();
+                if (sm.GetServiceValue(node.AppName, "State").ToString().Equals(ServiceState.Running))
+                {
+                    //先停止服务
+                    sm.StopService(node.AppName);
+                    Log.Info("关闭服务:" + node.AppName + "  ...");
+                    Thread.Sleep(500);
+                    if (sm.GetServiceValue(node.AppName, "State").ToString().Equals(ServiceState.Stopped))
+                    {
+                        Log.Info("关闭服务成功:" + node.AppName);
+                    }
+                    else
+                    {
+                        Log.Error("关闭服务失败:" + node.AppName);
+                    }
+                }
+                else
+                {
+                    Log.Info("服务:" + node.AppName + " 本不在运行，不做操作");
+                }
+            }
         }
     }
 }

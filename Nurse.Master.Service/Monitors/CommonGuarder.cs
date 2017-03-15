@@ -148,6 +148,8 @@ namespace Nurse.Master.Service.Monitors
                                     {
                                         LastBeatTime = lastBeatTime;
                                         log.Info("正常心跳");
+                                        //重置状态
+                                        _appErrExecutor.ResetState();
                                     }
                                 }
                                 else
