@@ -49,6 +49,20 @@ namespace Nurse.Master.Service.Monitors
             int count1 = 0;
 
             _appErrExecutor.Log = log;
+
+            //监控间隔提醒
+            if (_config.GuardInternal < 1500)
+            {
+
+                log.Fatal("注意: 配置的监控间隔小于1.5秒，监控非常容易出问题，监控停止！GuardInternal:" + _config.GuardInternal);
+                return;
+            }
+            else if (_config.GuardInternal < 5000)
+            {
+                log.Warn("注意: 配置的监控间隔小于5秒，可能存在问题！GuardInternal:" + _config.GuardInternal);
+            }
+           
+
             while (Common.IsRun)
             {
                 Thread.Sleep(_config.GuardInternal);
