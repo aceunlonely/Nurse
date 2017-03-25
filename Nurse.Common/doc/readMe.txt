@@ -1,4 +1,6 @@
-﻿业务心跳开发：
+﻿V1.0.0:
+
+业务心跳开发：
 	引入对应CPU架构的Nurse.Common.dll
 	业务代码关键逻辑处添加 BeatManger.Beat()
 
@@ -32,3 +34,24 @@ Nurse.Master.Service 部署说明：
 		MSMQConfigNode/Domain 对应ConfigDomain/Name，空值时，表明是本机的mq服务
 
 	服务设置为开机自动启动
+
+
+运维使用说明：
+	1、被监控服务更新发版时：
+		Nurse.Master.Service 服务需要停掉，停止时注意可能需要停多次（请确保配置项IsAlwaysRun=false）
+		更新被监控服务
+		再启动Nurse.Master.Service服务
+	2、被监控服务停止时：
+		修改nurse.config、mq.config配置（可以去掉节点，也能继续跟踪，配置为不处理）
+		重启Nurse.Master.Service（建议先停止，后开启，确保重启）
+		停止被监控服务
+	3、新增被监控服务
+		正常部署安装服务（服务如需要心跳监控，需要特别开发）
+		修改Nurse的配置 nurse.config
+		重启Nurse.Master.Service（建议先停止，后开启，确保重启）、
+	4、新增通道监控：
+		直接配置Nurse.Master.Service的mq.config
+		重启服务
+	5、更新WebStateCenter：
+		直接更新
+	6、Nurse.Master.Service：
