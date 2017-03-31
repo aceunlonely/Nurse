@@ -23,5 +23,10 @@ namespace Nurse.Master.Service.CM
         /// 检查Slave的时间间隔
         /// </summary>
         public static int Internal_Check_Slave { get { return ConfigureHelper.GetConfigureIntValue("Internal_Check_Slave", Internal); } }
+
+        /// <summary>
+        /// 服务重启重试次数 默认1200次（10分钟）
+        /// </summary>
+        public static int ServiceRebootReTryCount { get { return ConfigureHelper.GetConfigureIntValue("ServiceRebootReTryCount", 1200); } }
     }
 }

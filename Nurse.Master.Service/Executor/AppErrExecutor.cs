@@ -2,6 +2,7 @@
 using Nurse.Common.CM;
 using Nurse.Common.DDD;
 using Nurse.Common.helper;
+using Nurse.Master.Service.CM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -128,20 +129,40 @@ namespace Nurse.Master.Service.Executor
                 }
                 else
                 {
-                    //先停止服务
-                    sm.StopService(node.AppName);
-                    Log.Info("先关闭服务:" + node.AppName + "  ...");
-                    Thread.Sleep(500);
-                    Log.Info("  开始开启服务:");
-                    sm.StartService(node.AppName);
-                    Thread.Sleep(500);
-                    if (sm.GetServiceValue(node.AppName, "State").ToString().Equals(ServiceState.Running))
+
+                    for (int i = 0; i < 3; i++)
                     {
-                        Log.Info("重启服务成功:" + node.AppName);
-                    }
-                    else
-                    {
-                        Log.Error("重启服务失败:" + node.AppName);
+                        //先停止服务
+                        sm.StopService(node.AppName);
+                        Log.Info("关闭服务:" + node.AppName + "  ...");
+                        Thread.Sleep(500);
+                        int intCount = 0;
+                        while (sm.GetServiceValue(node.AppName, "State").ToString().Equals(ServiceState.Running))
+                        {
+                            Log.Info("等待服务:" + node.AppName + "关闭...");
+                            Thread.Sleep(500);
+                            if (intCount++ > Config.ServiceRebootReTryCount)
+                            {
+                                Log.Error("服务停止失败....");
+                                break;
+                            }
+                        }
+                        if (intCount > Config.ServiceRebootReTryCount)
+                        {
+                            //重试关闭
+                            continue;
+                        }
+                        Log.Info("  开始开启服务:");
+                        sm.StartService(node.AppName);
+                        Thread.Sleep(500);
+                        if (sm.GetServiceValue(node.AppName, "State").ToString().Equals(ServiceState.Running))
+                        {
+                            Log.Info("重启服务成功:" + node.AppName);
+                        }
+                        else
+                        {
+                            Log.Error("重启服务失败:" + node.AppName);
+                        }
                     }
 
                 }

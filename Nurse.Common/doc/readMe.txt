@@ -54,4 +54,5 @@ Nurse.Master.Service 部署说明：
 		重启服务
 	5、更新WebStateCenter：
 		直接更新
-	6、Nurse.Master.Service：
+	6、更新Nurse.Master.Service：
+		停止服务，请确保配置项IsAlwaysRun=false，确保停止后，更新文件
