@@ -7,3 +7,11 @@ vs2010+
 
 ## support os
 windows only
+
+
+## how to use 
+read ./howtouse.md
+
+
+## version
+1.1
