@@ -51,6 +51,7 @@
     <Compile Include="Monitors\CommonGuarder.cs" />
     <Compile Include="Monitors\MSMQMonitor.cs" />
     <Compile Include="Monitors\SlaveGuarder.cs" />
+    <Compile Include="Monitors\WinMonitor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProjectInstaller.cs">
       <SubType>Component</SubType>

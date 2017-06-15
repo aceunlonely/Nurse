@@ -57,6 +57,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Config.aspx" />
     <Content Include="index.aspx" />
     <Content Include="Main.ashx" />
     <None Include="map.config">
@@ -75,6 +76,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config.aspx.cs">
+      <DependentUpon>Config.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Config.aspx.designer.cs">
+      <DependentUpon>Config.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DDD\Map.cs" />
     <Compile Include="DDD\MapCollection.cs" />
     <Compile Include="DDD\MapManager.cs" />
@@ -90,6 +98,7 @@
       <DependentUpon>Main.ashx</DependentUpon>
     </Compile>
     <Compile Include="Main.cs" />
+    <Compile Include="Monitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -100,23 +100,25 @@ namespace Nurse.Master.Service
 
             //监控msmq
             var mqConfig = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "mq.config");
+            //存在监控配置，就进行监控，否则不进行监控
             if (File.Exists(mqConfig) == false)
             {
-                log.Info("程序未能找到配置文件: " + mqConfig);
+                log.Info("程序未能找到配置文件: " + mqConfig + " ,不进行监控");
             }
             else
             {
-                MSMQConfig msmqConfig = null;
-                try
-                {
-                    msmqConfig = XmlHelper.Xml2Entity(mqConfig, new MSMQConfig().GetType()) as MSMQConfig;
-                    log.Info("程序开始mq监控: " + mqConfig);
-                    MSMQMonitor.StartRun(msmqConfig);
-                }
-                catch (Exception ex)
-                {
-                    log.Error("加载msmq过程中出错误：" + ex.ToString());
-                }
+                WinMonitor.Run();
+                //MSMQConfig msmqConfig = null;
+                //try
+                //{
+                //    msmqConfig = XmlHelper.Xml2Entity(mqConfig, new MSMQConfig().GetType()) as MSMQConfig;
+                //    log.Info("程序开始mq监控: " + mqConfig);
+                //    MSMQMonitor.StartRun(msmqConfig);
+                //}
+                //catch (Exception ex)
+                //{
+                //    log.Error("加载msmq过程中出错误：" + ex.ToString());
+                //}
             }
         }
     }

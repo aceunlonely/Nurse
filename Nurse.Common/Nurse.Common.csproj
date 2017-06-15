@@ -66,6 +66,7 @@
     <Compile Include="helper\PerformanceCounterRetriever.cs" />
     <Compile Include="helper\ProcessHelper.cs" />
     <Compile Include="helper\ServiceManger.cs" />
+    <Compile Include="helper\WinMonitorHelper.cs" />
     <Compile Include="helper\XmlHelper.cs" />
     <Compile Include="Implements\BeatManager.cs" />
     <Compile Include="Implements\DiskConnector.cs" />

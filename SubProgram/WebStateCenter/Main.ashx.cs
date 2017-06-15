@@ -21,7 +21,7 @@ namespace WebStateCenter
 
             if (string.IsNullOrEmpty(strOp))
             {
-                Return(context, "Hello World");
+                Return(context, "Hello, here is main");
             }
             else
             {
@@ -47,6 +47,17 @@ namespace WebStateCenter
                         break;
                     case "sendMsg":
                         MainExe.SendMsg(strKey, strVal);
+                        Return(context, "1");
+                        break;
+
+                    case "getMSMQConfig":
+                        Return(context, MonitorExe.getMSMQConfig());
+                        break;
+                    case "getLastConfigTime":
+                        Return(context, MonitorExe.getLastConfigTime());
+                        break;
+                    case "sendMonitorMsg":
+                        MonitorExe.addMsg(strVal);
                         Return(context, "1");
                         break;
                 }

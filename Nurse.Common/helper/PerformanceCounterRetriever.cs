@@ -105,6 +105,33 @@ namespace PerformanceReader
             return 0;
         }
 
+
+        public PerformanceCounter GetCounter(string categoryName, string counterName, string optionalInstanceName = null)
+        {
+            if (string.IsNullOrWhiteSpace(categoryName))
+                throw new ArgumentException("Null/blank {nameof(categoryName)} specified");
+            if (string.IsNullOrWhiteSpace(counterName))
+                throw new ArgumentException("Null/blank {nameof(counterName)} specified");
+
+            var counters = new List<PerformanceCounter>();
+            var category = new PerformanceCounterCategory(categoryName, _server);
+            if (optionalInstanceName == null)
+            {
+                foreach (var counter in category.GetCounters())
+                {
+                    if (counter.CounterName == counterName)
+                    {
+                        return new PerformanceCounter(categoryName, counterName, null, _server);
+                    }
+                }
+            }
+            else
+            {
+                return new PerformanceCounter(categoryName, counterName, optionalInstanceName, _server);
+            }
+            return null ;
+        }
+
         public void Dispose()
         {
             Dispose(true);

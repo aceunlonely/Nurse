@@ -10,6 +10,9 @@ using System.Text;
 
 namespace Nurse.Common.helper
 {
+    /// <summary>
+    /// MSMQ帮助类
+    /// </summary>
     public class MSMQHelper
     {
 

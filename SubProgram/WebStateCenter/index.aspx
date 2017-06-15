@@ -79,6 +79,7 @@
         </div>
 
         <h3>MQ监控</h3>
+        <%--<h4>通道深度</h4>
         <div>
             <asp:GridView ID="gvMq" runat="server" AutoGenerateColumns="False"
                 ForeColor="#333333" CssClass="mGrid" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt">
@@ -86,6 +87,20 @@
                 <Columns>
                     <asp:BoundField DataField="Name" HeaderText="MQ通道" />
                     <asp:BoundField DataField="Count" HeaderText="通道深度" />
+                    <asp:BoundField DataField="Remark" HeaderText="说明" />
+                </Columns>
+            </asp:GridView>
+        </div>
+        <h4>实时进出速率</h4>--%>
+        <div>
+            <asp:GridView ID="gvMqRate" runat="server" AutoGenerateColumns="False"
+                ForeColor="#333333" CssClass="mGrid" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt">
+                <FooterStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
+                <Columns>
+                    <asp:BoundField DataField="Domain" HeaderText="IP" />
+                    <asp:BoundField DataField="CounterName" HeaderText="监控项" />
+                    <asp:BoundField DataField="Instance" HeaderText="实例" />
+                    <asp:BoundField DataField="Result" HeaderText="实例" />
                     <asp:BoundField DataField="Remark" HeaderText="说明" />
                 </Columns>
             </asp:GridView>

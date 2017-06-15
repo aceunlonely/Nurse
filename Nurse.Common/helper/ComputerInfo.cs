@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Management;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -79,6 +80,11 @@ namespace Nurse.Common.helper
         }
         public static string GetIPAddress()
         {
+            if (string.IsNullOrEmpty(IpAddress) == false)
+            {
+                return IpAddress;
+            }
+
             try
             {
                 //获取IP地址 
@@ -98,10 +104,21 @@ namespace Nurse.Common.helper
                 }
                 moc = null;
                 mc = null;
+                IpAddress = st;
                 return st;
             }
             catch
             {
+                try
+                {
+                    IPAddress ipAddr = Dns.Resolve(Dns.GetHostName()).AddressList[0];
+                    string ip = ipAddr.ToString();
+                    IpAddress = ip;
+                    return ip;
+                }
+                catch { }
+
+
                 return "unknow";
             }
             finally

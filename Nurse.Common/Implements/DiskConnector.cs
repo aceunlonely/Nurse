@@ -145,7 +145,13 @@ namespace Nurse.Common.Implements
 
         public string SendMsg(string type, string msg)
         {
-            // do nothin
+            // do nothing
+            return string.Empty;
+        }
+
+        public string Promise(string name, string key, string value)
+        {
+            // do nothing
             return string.Empty;
         }
     }

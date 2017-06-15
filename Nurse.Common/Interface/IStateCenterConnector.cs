@@ -46,5 +46,14 @@ namespace Nurse.Common.Interface
         /// <param name="msg">消息</param>
         /// <returns></returns>
         string SendMsg(string type,string msg);
+
+        /// <summary>
+        /// 约定
+        /// </summary>
+        /// <param name="name">约定名</param>
+        /// <param name="key">键</param>
+        /// <param name="value">值</param>
+        /// <returns></returns>
+        string Promise(string name, string key, string value);
     }
 }

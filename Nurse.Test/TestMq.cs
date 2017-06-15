@@ -24,7 +24,62 @@ namespace Nurse.Test
             //TestConfig();
             //TestGet();
             //TestConfig();
-            TestDe();
+            //TestDe();
+            //TestMSMQService();
+            //TestRemoteMsMQService();
+            //TestConfigRead();
+            //TestGetIP();
+            
+        }
+
+        public void TestGetIP()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                Console.WriteLine(ComputerInfo.GetIPAddress());
+                Thread.Sleep(500);
+            }
+        }
+
+
+        public void TestRemoteMsMQService() {
+            //PerformanceCounterRetriever pc = new PerformanceCounterRetriever("192.168.12.11", "WORKGROUP", "Administrator", "Lxy@12345");
+            //
+            PerformanceCounterRetriever pc = new PerformanceCounterRetriever("192.168.10.181", "WORKGROUP", "yanfa", "Dcjet@181");
+            PerformanceCounter pfc1 = pc.GetCounter("MSMQ Service", "Outgoing Messages/sec");
+            PerformanceCounter pfc2 = pc.GetCounter("MSMQ Service", "Incoming Messages/sec");
+
+            while (true)
+            {
+                Console.WriteLine("Outgoing Messages/sec" + pfc1.NextValue().ToString());
+                Console.WriteLine("Incoming Messages/sec" + pfc2.NextValue().ToString());
+                Console.WriteLine("=========================================================");
+                Thread.Sleep(500);
+            }
+
+            
+        }
+
+        public void TestMSMQService() {
+
+            PerformanceCounterCategory countCategory = new PerformanceCounterCategory("MSMQ Service");
+            
+            //所有消息队列数量
+            PerformanceCounter oms = new PerformanceCounter("MSMQ Service", "Outgoing Messages/sec");
+            PerformanceCounter ims = new PerformanceCounter("MSMQ Service", "Incoming Messages/sec");
+            //foreach (string instanceName in countCategory.GetInstanceNames())
+            //{
+            //    allCount.InstanceName = instanceName;//需要给实例名赋值
+            //    Console.WriteLine(string.Format("{0} 数量：{1}", allCount.InstanceName, allCount.NextValue().ToString()));
+            //}
+            while (true)
+            {
+                Console.WriteLine("Outgoing Messages/sec" + oms.NextValue().ToString());
+                Console.WriteLine("Incoming Messages/sec" + ims.NextValue().ToString());
+                Console.WriteLine("=========================================================");
+                Thread.Sleep(500);
+            }
+
         }
 
         public void TestDe()
@@ -34,25 +89,35 @@ namespace Nurse.Test
 
         public void TestGet()
         {
-            PerformanceCounterRetriever pc = new PerformanceCounterRetriever("192.168.10.228", "WORKGROUP", "administrator", "dcjet@888");
+            //PerformanceCounterRetriever pc = new PerformanceCounterRetriever("192.168.10.228", "WORKGROUP", "administrator", "dcjet@888");
+            //PerformanceCounterRetriever pc = new PerformanceCounterRetriever("192.168.12.11", "WORKGROUP", "Administrator", "Lxy@12345");
+            //
+            PerformanceCounterRetriever pc = new PerformanceCounterRetriever("192.168.10.181", "WORKGROUP", "yanfa", "Dcjet@181");
 
-            Console.WriteLine(pc.Get("MSMQ Queue", "Messages in Queue", @"highvertest\private$\tx1"));
+            Console.WriteLine(pc.Get("MSMQ Queue", "Messages in Queue", @"private$\lxy"));
 
         }
 
         public void TestConfig()
         {
             MSMQConfig mc = new MSMQConfig();
-            string msg = "192.168.10.228|WORKGROUP|administrator|dcjet@888";
-            string strMsg = "ESvKEYyK/iZYFW2Zj16BRvdWGjElI+j75K5CLvjfMKgeIl0pvMRcvXWKU/roIuQNV37DiFNdhErwk7YWtXuL7AIn8z+4V6NFHLTLkwn8XsatMhL5OSsvzwAupJuzhbuJEHOINdRDopQ=";
+            string msg = "192.168.10.181|WORKGROUP|yanfa|Dcjet@181";
+            string strMsg = EncryptHelper.EncryptDES(msg);// "ESvKEYyK/iZYFW2Zj16BRvdWGjElI+j75K5CLvjfMKgeIl0pvMRcvXWKU/roIuQNV37DiFNdhErwk7YWtXuL7AIn8z+4V6NFHLTLkwn8XsatMhL5OSsvzwAupJuzhbuJEHOINdRDopQ=";
             mc.Domains = new List<ConfigDomain>();
-            mc.Domains.Add(new ConfigDomain() { Name = "228", Value = strMsg });
+            mc.Domains.Add(new ConfigDomain() { Name = "181", Value = strMsg });
 
             mc.Nodes = new List<MSMQConfigNode>();
-            mc.Nodes.Add(new MSMQConfigNode() { Instance = @"xyliu\private$\lxy", Domain = "" });
-            mc.Nodes.Add(new MSMQConfigNode() { Instance=@"highvertest\private$\tx1",Domain="228" });
+            mc.Nodes.Add(new MSMQConfigNode() { Instance = @"private$\lxy", Domain = "181", CategoryName = "MSMQ Queue", CounterName = "Messages in Queue" });
+            mc.Nodes.Add(new MSMQConfigNode() { Instance = "", Domain = "181", CategoryName = "MSMQ Service", CounterName = "Outgoing Messages/sec" });
+            mc.Nodes.Add(new MSMQConfigNode() { Instance = "", Domain = "181", CategoryName = "MSMQ Service", CounterName = "Incoming Messages/sec" });
             string strPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "mq.config.demo");
             XmlHelper.Enity2Xml(strPath, mc);
+        }
+
+        public void TestConfigRead()
+        {
+            string strPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "mq.config.demo");
+            MSMQConfig config = XmlHelper.Xml2Entity(strPath, new MSMQConfig().GetType()) as MSMQConfig;
         }
 
         public void TestSend()

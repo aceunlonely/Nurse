@@ -18,153 +18,66 @@ namespace Nurse.Common.Implements
     {
         public bool IsCenterAlived()
         {
-            WebClient wc = new WebClient();
-            if (string.IsNullOrEmpty(CommonConfig.WebStateCenterUrl))
-            {
-                throw new Exception("未配置节点：WebStateCenterUrl");
-            }
-            try
-            {
-                Byte[] pageData = wc.DownloadData(CommonConfig.WebStateCenterUrl + "?op=isAlive");
-                string result = Encoding.Default.GetString(pageData);  //如果获取网站页面采用的是GB2312，则使用这句 
-
-
-                if (result == "1")
-                {
-                    return true;
-                }
-                return false;
-            }
-            catch (Exception ex)
-            {
-                CommonLog.InnerErrorLog.Error("访问站点出错:" + CommonConfig.WebStateCenterUrl + "?op=isAlive |" + ex.ToString());
-                return false;
-            }
-            finally
-            {
-                wc.Dispose();
-            }
+            return Promise("isAlive", "", "") == "1";
         }
 
         public DateTime? GetLastBeatTime(string key)
         {
-            WebClient wc = new WebClient();
-            if (string.IsNullOrEmpty(CommonConfig.WebStateCenterUrl))
+            string result = Promise("getBeatTime", key,"");
+            if (string.IsNullOrEmpty(result))
             {
-                throw new Exception("未配置节点：WebStateCenterUrl");
-            }
-            try
-            {
-                Byte[] pageData = wc.DownloadData(CommonConfig.WebStateCenterUrl + "?op=getBeatTime&key=" + EncodeHelper.UrlEncode(key));
-                string result = Encoding.Default.GetString(pageData);  //如果获取网站页面采用的是GB2312，则使用这句 
-                if (string.IsNullOrEmpty(result))
-                {
-                    return null;
-                }
-
-                DateTime dt;
-                if (DateTime.TryParse(result, out dt))
-                {
-                    return dt;
-                }
-                else
-                {
-                    CommonLog.InnerErrorLog.Error("时间转换错误：" + result);
-                    return null;
-                }
-                //return Convert.ToDateTime(result, dtFormat);
-
-            }
-            catch (Exception ex)
-            {
-                CommonLog.InnerErrorLog.Error("访问站点出错:" + CommonConfig.WebStateCenterUrl + "?op=isAlive |" + ex.ToString());
                 return null;
             }
-            finally
+            DateTime dt;
+            if (DateTime.TryParse(result, out dt))
             {
-                wc.Dispose();
+                return dt;
+            }
+            else
+            {
+                CommonLog.InnerErrorLog.Error("时间转换错误：" + result);
+                return null;
             }
         }
 
         public bool Beat(string key, DateTime? beatTime)
-        {
-            WebClient wc = new WebClient();
-            if (string.IsNullOrEmpty(CommonConfig.WebStateCenterUrl))
-            {
-                throw new Exception("未配置节点：WebStateCenterUrl");
-            }
-
-            string strUrl = CommonConfig.WebStateCenterUrl + "?op=beat&key=" + EncodeHelper.UrlEncode(key) + "&val=" + (beatTime.HasValue ? EncodeHelper.UrlEncode(beatTime.Value.ToString("yyyy-MM-dd HH:mm:ss")) : "");
-            try
-            {
-                Byte[] pageData = wc.DownloadData(strUrl);
-                string result = Encoding.Default.GetString(pageData);
-                if (string.IsNullOrEmpty(result))
-                {
-                    return false;
-                }
-                return true;
-            }
-            catch (Exception ex)
-            {
-                CommonLog.InnerErrorLog.Error("访问站点出错:" + strUrl + " |" + ex.ToString());
-                return false;
-            }
-            finally
-            {
-                wc.Dispose();
-            }
+        { 
+            return string.IsNullOrEmpty(Promise("beat",key,(beatTime.HasValue ? EncodeHelper.UrlEncode(beatTime.Value.ToString("yyyy-MM-dd HH:mm:ss")) : ""))) ==false;
         }
 
 
         public bool IsClientAlived(string key)
         {
-            WebClient wc = new WebClient();
-            if (string.IsNullOrEmpty(CommonConfig.WebStateCenterUrl))
-            {
-                throw new Exception("未配置节点：WebStateCenterUrl");
-            }
-            try
-            {
-                Byte[] pageData = wc.DownloadData(CommonConfig.WebStateCenterUrl + "?op=isKeyAlived&key=" + EncodeHelper.UrlEncode(key));
-                string result = Encoding.Default.GetString(pageData);  //如果获取网站页面采用的是GB2312，则使用这句 
-
-
-                if (result == "1")
-                {
-                    return true;
-                }
-                return false;
-            }
-            catch (Exception ex)
-            {
-                CommonLog.InnerErrorLog.Error("访问站点出错:" + CommonConfig.WebStateCenterUrl + "?op=isAlive |" + ex.ToString());
-                return false;
-            }
-            finally
-            {
-                wc.Dispose();
-            }
+            return Promise("isKeyAlived", key, "") == "1";
         }
 
 
         public string SendMsg(string type, string msg)
         {
+            return Promise("sendMsg", type, msg);
+        }
+
+
+        public string Promise(string name, string key, string value)
+        {
             WebClient wc = new WebClient();
+            string url = string.Empty;
             if (string.IsNullOrEmpty(CommonConfig.WebStateCenterUrl))
             {
                 throw new Exception("未配置节点：WebStateCenterUrl");
             }
             try
             {
-                Byte[] pageData = wc.DownloadData(CommonConfig.WebStateCenterUrl + "?op=sendMsg&key=" + EncodeHelper.UrlEncode(type) + "&val=" + EncodeHelper.UrlEncode(msg));
+                string ekey = string.IsNullOrEmpty(key) ? "" : EncodeHelper.UrlEncode(key);
+                string eVal = string.IsNullOrEmpty(value) ? "" :   EncodeHelper.UrlEncode(value);
+                url = CommonConfig.WebStateCenterUrl + "?op=" + name + "&key=" + ekey + "&val=" + eVal;
+                Byte[] pageData = wc.DownloadData(url);
                 string result = Encoding.Default.GetString(pageData);  //如果获取网站页面采用的是GB2312，则使用这句 
-
                 return result;
             }
             catch (Exception ex)
             {
-                CommonLog.InnerErrorLog.Error("访问站点出错:" + CommonConfig.WebStateCenterUrl + "?op=sendMsg&key=" + EncodeHelper.UrlEncode(type) + "&val=" + EncodeHelper.UrlEncode(msg) + "  |" + ex.ToString());
+                CommonLog.InnerErrorLog.Error("访问站点出错:" + url + "  |" + ex.ToString());
                 return string.Empty;
             }
             finally
@@ -172,5 +85,6 @@ namespace Nurse.Common.Implements
                 wc.Dispose();
             }
         }
+
     }
 }
