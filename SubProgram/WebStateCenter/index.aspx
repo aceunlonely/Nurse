@@ -109,12 +109,17 @@
                 </Columns>
             </asp:GridView>
         </div>
+
+
+       <asp:Button ID="autoRefresh" runat="server"  style ="display:none;" OnClick="autoRefresh_Click"/>
     </form>
 </body>
 </html>
 <script type="text/javascript">
     function myrefresh() {
-        window.location.reload();
+        // window.location.reload();
+
+        window.document.getElementById('<%=autoRefresh.ClientID %>').click()
     }
     setTimeout('myrefresh()', 2000); //指定1秒刷新一次 
 

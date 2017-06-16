@@ -68,5 +68,10 @@ namespace WebStateCenter
             gvMqRate.DataBind();
         }
 
+        protected void autoRefresh_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
