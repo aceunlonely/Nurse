@@ -19,14 +19,14 @@ namespace Nurse.Test
         {
             //TestSend();
 
-            //TestGetCount();
+            TestGetCount();
             //TestAllCount();
             //TestConfig();
             //TestGet();
             //TestConfig();
             //TestDe();
             //TestMSMQService();
-            TestRemoteMsMQService();
+            //TestRemoteMsMQService();
             //TestConfigRead();
             //TestGetIP();
             
