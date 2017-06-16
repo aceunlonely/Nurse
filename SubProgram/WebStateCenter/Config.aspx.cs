@@ -132,6 +132,8 @@ namespace WebStateCenter
         protected void btnAdd_Click(object sender, EventArgs e)
         {
             Clear();
+            ClearSelectedKeys();
+
 
         }
 
@@ -209,6 +211,16 @@ namespace WebStateCenter
                 }
             }
             return keys;
+        }
+
+        private void ClearSelectedKeys()
+        {
+            foreach (GridViewRow gvr in this.gvMq.Rows)
+            {
+                Control ctl = gvr.FindControl("ckb");
+                CheckBox ck = (CheckBox)ctl;
+                ck.Checked = false;
+            }
         }
 
         /// <summary>
