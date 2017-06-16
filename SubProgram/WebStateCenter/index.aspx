@@ -94,6 +94,7 @@
         <h4>实时进出速率</h4>--%>
 
         <asp:LinkButton ID="btnConfig"  runat="server" OnClick="btnConfig_Click" >配置</asp:LinkButton>
+        <asp:LinkButton ID="btnRefresh"  runat="server"  OnClick="btnRefresh_Click" >手动刷新</asp:LinkButton>
         
         <div>
             <asp:GridView ID="gvMqRate" runat="server" AutoGenerateColumns="False"

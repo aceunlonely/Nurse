@@ -60,5 +60,13 @@ namespace WebStateCenter
             Response.Redirect("~/Config.aspx");
         }
 
+        protected void btnRefresh_Click(object sender, EventArgs e)
+        {
+
+            MonitorExe.CleanLoaclMsg();
+            gvMqRate.DataSource = MonitorExe.GetMsg();
+            gvMqRate.DataBind();
+        }
+
     }
 }

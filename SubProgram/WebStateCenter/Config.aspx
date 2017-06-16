@@ -134,6 +134,8 @@
                 </Columns>
             </asp:GridView>
         </div>
+
+        <asp:Button Text="返回" runat="server"  ID="btnBack" OnClick="btnBack_Click" />
     </form>
 </body>
 </html>

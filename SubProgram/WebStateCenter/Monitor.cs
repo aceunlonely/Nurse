@@ -46,6 +46,13 @@ namespace WebStateCenter
             innerMsg.Clear();
         }
 
+        /// <summary>
+        /// 清理本地数据
+        /// </summary>
+        public static void CleanLoaclMsg() {
+            innerMsg.Clear(); 
+        }
+
 
         private readonly static ConcurrentDictionary<string, MonitorResult> innerMsg = new ConcurrentDictionary<string, MonitorResult>();
 
