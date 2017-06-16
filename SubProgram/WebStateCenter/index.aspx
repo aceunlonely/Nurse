@@ -92,15 +92,18 @@
             </asp:GridView>
         </div>
         <h4>实时进出速率</h4>--%>
+
+        <asp:LinkButton ID="btnConfig"  runat="server" OnClick="btnConfig_Click" >配置</asp:LinkButton>
+        
         <div>
             <asp:GridView ID="gvMqRate" runat="server" AutoGenerateColumns="False"
                 ForeColor="#333333" CssClass="mGrid" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt">
                 <FooterStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
                 <Columns>
-                    <asp:BoundField DataField="Domain" HeaderText="IP" />
-                    <asp:BoundField DataField="CounterName" HeaderText="监控项" />
-                    <asp:BoundField DataField="Instance" HeaderText="实例" />
-                    <asp:BoundField DataField="Result" HeaderText="实例" />
+                    <asp:BoundField DataField="Domain" HeaderText="IP" HeaderStyle-Width="15%" />
+                    <asp:BoundField DataField="CounterName" HeaderText="监控项" HeaderStyle-Width="15%" />
+                    <asp:BoundField DataField="Instance" HeaderText="实例" HeaderStyle-Width="15%" />
+                    <asp:BoundField DataField="Result" HeaderText="结果" HeaderStyle-Width="15%" />
                     <asp:BoundField DataField="Remark" HeaderText="说明" />
                 </Columns>
             </asp:GridView>
@@ -108,11 +111,10 @@
     </form>
 </body>
 </html>
-<script type="text/javascript"> 
-    function myrefresh() 
-              { 
-                  window.location.reload(); 
-              } 
+<script type="text/javascript">
+    function myrefresh() {
+        window.location.reload();
+    }
     setTimeout('myrefresh()', 2000); //指定1秒刷新一次 
 
 </script>

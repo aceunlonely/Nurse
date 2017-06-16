@@ -96,24 +96,25 @@ namespace Nurse.Master.Service.Monitors
                                 return;
                             }
                         }
-                        //判断是否成功读取配置文件
-                        if (_config == null)
-                        {
-                            //如果为空继续抓取远端配置
-                            continue;
-                        }
-                        //执行监控
-                        List<MonitorResult> mrs = WinMonitorHelper.RunMonitor(_config);
-                        //推送数据到服务器
-                        string msg = string.Empty;
-                        foreach (MonitorResult mr in mrs)
-                        {
-                            msg += (mr.Domain ?? "") + "~" + (mr.CategoryName ?? "") + "~" + (mr.CounterName ?? "") + "~"
-                                + (mr.Instance ?? "") + "~" + (mr.Result ?? "") + "~" + (mr.Remark ?? "") + "|";
-                        }
-                        connector.Promise("sendMonitorMsg", "key", msg.TrimEnd(new char[] { '|' }));
 
                     }
+
+                    //判断是否成功读取配置文件
+                    if (_config == null)
+                    {
+                        //如果为空继续抓取远端配置
+                        continue;
+                    }
+                    //执行监控
+                    List<MonitorResult> mrs = WinMonitorHelper.RunMonitor(_config);
+                    //推送数据到服务器
+                    string msg = string.Empty;
+                    foreach (MonitorResult mr in mrs)
+                    {
+                        msg += (mr.Domain ?? "") + "~" + (mr.CategoryName ?? "") + "~" + (mr.CounterName ?? "") + "~"
+                            + (mr.Instance ?? "") + "~" + (mr.Result ?? "") + "~" + (mr.Remark ?? "") + "|";
+                    }
+                    connector.Promise("sendMonitorMsg", "key", msg.TrimEnd(new char[] { '|' }));
 
                 }
                 catch (Exception ex)

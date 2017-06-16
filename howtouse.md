@@ -62,3 +62,7 @@ V1.1.0
     v1.0.0基础上添加配置
     WebStateCenter 部署说明：
         根目录添加 mq.config配置项，详细配置见 mq.config.demo
+    需要进行监控的master.service 需要配置节点 mq.config
+
+    
+    

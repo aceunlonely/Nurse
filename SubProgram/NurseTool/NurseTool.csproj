@@ -50,6 +50,7 @@
     <None Include="App.config" />
     <None Include="mq.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>

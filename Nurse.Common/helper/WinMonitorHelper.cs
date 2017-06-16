@@ -20,6 +20,11 @@ namespace Nurse.Common.helper
         /// </summary>
         private static Dictionary<string, PerformanceCounterRetriever> _performanceMap = new Dictionary<string, PerformanceCounterRetriever>();
 
+        /// <summary>
+        /// 计数器集合
+        /// </summary>
+        private static Dictionary<string, PerformanceCounter> _counterMap = new Dictionary<string, PerformanceCounter>();
+
         private static void DomainInit(List<ConfigDomain> domains)
         {
             if (domains == null) return;
@@ -63,15 +68,27 @@ namespace Nurse.Common.helper
                 categoryName = "MSMQ Queue";
             if (string.IsNullOrEmpty(counterName))
                 counterName = "Messages in Queue";
-            if (string.IsNullOrEmpty(domainName) || domainName == ComputerInfo.GetIPAddress())
+
+            PerformanceCounter pfc = null;
+            string key = (domainName ?? "") + categoryName + counterName + (optionalInstanceName ?? "");
+
+            if (_counterMap.ContainsKey(key))
             {
-                return new PerformanceCounter(categoryName, counterName, optionalInstanceName);
+                pfc = _counterMap[key];
             }
-            if (_performanceMap.ContainsKey(domainName))
+            else
             {
-                return _performanceMap[domainName].GetCounter(categoryName, counterName, optionalInstanceName);
+                if (string.IsNullOrEmpty(domainName) || domainName == ComputerInfo.GetIPAddress())
+                {
+                    pfc = new PerformanceCounter(categoryName, counterName, optionalInstanceName);
+                }
+                if (_performanceMap.ContainsKey(domainName))
+                {
+                    pfc = _performanceMap[domainName].GetCounter(categoryName, counterName, optionalInstanceName);
+                }
+                _counterMap.Add(key, pfc);
             }
-            return null;
+            return pfc;
         }
 
         /// <summary>
@@ -112,6 +129,7 @@ namespace Nurse.Common.helper
                 catch(Exception ex) 
                 {
                     mr.Remark = "节点获取异常：" + (CommonConfig.IsDebug ? ex.ToString() : "");
+                    CommonLog.InnerErrorLog.Error("节点获取异常：" + ex.ToString());
                 }
                 rs.Add(mr);
 

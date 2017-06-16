@@ -25,7 +25,7 @@ namespace WebStateCenter
             //    List<MqCount> mcs = new List<MqCount>();
             //    foreach (string row in rows)
             //    {
-                    
+
             //        if (string.IsNullOrEmpty(row) == false)
             //        {
             //            string[] fileds = row.Split(new char[] { '@' });
@@ -44,13 +44,21 @@ namespace WebStateCenter
             //        {
             //            //gvMq.DataSource = mcs;
             //            //gvMq.DataBind();
-                        
+
             //        }
             //    }
             //}
 
+
             gvMqRate.DataSource = MonitorExe.GetMsg();
             gvMqRate.DataBind();
+
         }
+
+        protected void btnConfig_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Config.aspx");
+        }
+
     }
 }

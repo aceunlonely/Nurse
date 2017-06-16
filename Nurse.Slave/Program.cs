@@ -47,14 +47,14 @@ namespace Nurse.Slave
                 //Nurse.Master
                 try
                 {
-                    if (SM.GetServiceValue("Nurse.Master", "state").Equals(ServiceState.Stopped))
+                    if (SM.GetServiceValue(Config.MasterServiceName, "state").Equals(ServiceState.Stopped))
                     {
-                        SM.StartService("Nurse.Master");
+                        SM.StartService(Config.MasterServiceName);
                     }
                 }
                 catch (Exception ex)
                 {
-                    Log.Error("执行监控时出错：" + ex.ToString());
+                    Log.Error("执行监控时出错(" + Config.MasterServiceName + ")：" + ex.ToString());
                 }
                 Thread.Sleep(Config.Internal);
             }

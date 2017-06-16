@@ -37,6 +37,14 @@ namespace WebStateCenter
             return lastConfigTime.Value.ToString("yyyy-MM-dd hh:mm:ss");
         }
 
+        /// <summary>
+        /// 更新最后配置时间
+        /// </summary>
+        public static void UpdateLastConfigTime()
+        {
+            lastConfigTime = DateTime.Now;
+            innerMsg.Clear();
+        }
 
 
         private readonly static ConcurrentDictionary<string, MonitorResult> innerMsg = new ConcurrentDictionary<string, MonitorResult>();
@@ -100,4 +108,5 @@ namespace WebStateCenter
             
         }
     }
+
 }

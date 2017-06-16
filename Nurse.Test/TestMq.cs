@@ -26,7 +26,7 @@ namespace Nurse.Test
             //TestConfig();
             //TestDe();
             //TestMSMQService();
-            //TestRemoteMsMQService();
+            TestRemoteMsMQService();
             //TestConfigRead();
             //TestGetIP();
             
@@ -44,6 +44,8 @@ namespace Nurse.Test
 
         public void TestRemoteMsMQService() {
             //PerformanceCounterRetriever pc = new PerformanceCounterRetriever("192.168.12.11", "WORKGROUP", "Administrator", "Lxy@12345");
+
+
             //
             PerformanceCounterRetriever pc = new PerformanceCounterRetriever("192.168.10.181", "WORKGROUP", "yanfa", "Dcjet@181");
             PerformanceCounter pfc1 = pc.GetCounter("MSMQ Service", "Outgoing Messages/sec");
@@ -51,6 +53,7 @@ namespace Nurse.Test
 
             while (true)
             {
+   
                 Console.WriteLine("Outgoing Messages/sec" + pfc1.NextValue().ToString());
                 Console.WriteLine("Incoming Messages/sec" + pfc2.NextValue().ToString());
                 Console.WriteLine("=========================================================");
@@ -94,7 +97,9 @@ namespace Nurse.Test
             //
             PerformanceCounterRetriever pc = new PerformanceCounterRetriever("192.168.10.181", "WORKGROUP", "yanfa", "Dcjet@181");
 
-            Console.WriteLine(pc.Get("MSMQ Queue", "Messages in Queue", @"private$\lxy"));
+            Console.WriteLine(pc.Get("MSMQ Queue", "Messages in Queue", @"apollo-bw\private$\lxy"));
+
+
 
         }
 

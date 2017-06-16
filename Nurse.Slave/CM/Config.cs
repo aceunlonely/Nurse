@@ -13,5 +13,7 @@ namespace Nurse.Slave.CM
         /// 通用间隔
         /// </summary>
         public static int Internal { get { return ConfigureHelper.GetConfigureIntValue("Internal", 10000); } }
+
+        public static string MasterServiceName { get { return ConfigureHelper.GetConfigureValue("MasterServiceName", "Nurse.Master"); } }
     }
 }

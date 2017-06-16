@@ -30,5 +30,10 @@ namespace Nurse.Common.DDD
         /// 计数器名
         /// </summary>
         public string CounterName { get; set; }
+
+        public override string ToString()
+        {
+            return (Domain ?? "") + (CategoryName ?? "") + (CounterName ?? "") + (Instance ?? "");
+        }
     }
 }
