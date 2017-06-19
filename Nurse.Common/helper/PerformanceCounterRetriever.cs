@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Nurse.Common.helper;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -115,6 +116,7 @@ namespace PerformanceReader
 
             var counters = new List<PerformanceCounter>();
             var category = new PerformanceCounterCategory(categoryName, _server);
+
             if (optionalInstanceName == null)
             {
                 foreach (var counter in category.GetCounters())
@@ -127,7 +129,11 @@ namespace PerformanceReader
             }
             else
             {
-                return new PerformanceCounter(categoryName, counterName, optionalInstanceName, _server);
+                if (ComputerInfo.Ping(_server))
+                {
+                    return new PerformanceCounter(categoryName, counterName, optionalInstanceName, _server);
+                }
+                
             }
             return null ;
         }

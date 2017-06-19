@@ -74,7 +74,7 @@ namespace WebStateCenter
 
             gvMq.DataSource = list;
             gvMq.DataBind();
-            
+
         }
 
 
@@ -331,7 +331,7 @@ namespace WebStateCenter
                 });
             }
             else
-            { 
+            {
                 //修改
                 listDomains[0].Value = domainValue;
             }
@@ -351,6 +351,51 @@ namespace WebStateCenter
         protected void btnBack_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/index.aspx");
+        }
+
+        protected void btnDelete_Click(object sender, EventArgs e)
+        {
+            List<string> keys = GetSelectKeys();
+
+            if (keys.Count == 0)
+            {
+                Response.Write("<script>alert('至少选中一项进行删除')</script>");
+                return;
+            }
+            else
+            {
+                MSMQConfig config = this.TempConfig;
+                List<MSMQConfigNode> removeNodes = new List<MSMQConfigNode>();
+                foreach (string key in keys)
+                {
+                    foreach (MSMQConfigNode node in config.Nodes)
+                    {
+                        if (key == node.ToString())
+                        {
+                            removeNodes.Add(node);
+                        }
+                    }
+                }
+                if (removeNodes.Count > 0)
+                {
+                    removeNodes.ForEach(p => {
+                        config.Nodes.Remove(p);
+                    });
+
+                    //更新session
+                    TempConfig = config;
+                    //保存config
+                    XmlHelper.Enity2Xml(ConfigPath, config);
+                    //刷新表格
+                    BindGridView(config);
+                    //clear
+                    Clear();
+
+                    //更新服务配置文件时间
+                    MonitorExe.UpdateLastConfigTime();
+                }
+
+            }
         }
 
 

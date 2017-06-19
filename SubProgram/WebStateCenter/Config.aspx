@@ -113,7 +113,7 @@
             <asp:LinkButton ID="btnAdd" runat="server" OnClick="btnAdd_Click">新增</asp:LinkButton>
             <asp:LinkButton ID="btnEdit" runat="server" OnClick="btnEdit_Click">修改</asp:LinkButton>
             <asp:LinkButton ID="btnSave" runat="server" OnClick="btnSave_Click">保存</asp:LinkButton>
-            <asp:LinkButton ID="btnDelete" runat="server">删除</asp:LinkButton>
+            <asp:LinkButton ID="btnDelete" runat="server" OnClick="btnDelete_Click">删除</asp:LinkButton>
         </div>
         <div>
             <asp:GridView ID="gvMq" runat="server" AutoGenerateColumns="False"

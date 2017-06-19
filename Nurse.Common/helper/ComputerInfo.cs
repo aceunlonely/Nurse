@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Management;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Nurse.Common.helper
@@ -44,6 +46,34 @@ namespace Nurse.Common.helper
             }
 
         }
+
+        private static bool  IsValidIp(string strIn)
+        {
+            return Regex.IsMatch(strIn, @"((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)");
+        }
+
+        /// <summary>
+        /// ping ip
+        /// </summary>
+        /// <param name="ip"></param>
+        /// <returns></returns>
+        public static bool Ping(string ip)
+        {
+            if (IsValidIp(ip) == false)
+                return false;
+            Ping ping = new Ping();
+            PingReply pingReply = ping.Send(ip);
+            if (pingReply.Status == IPStatus.Success)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }  
+        }
+
+
         public static string GetMacAddress()
         {
             try
