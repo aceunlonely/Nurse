@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CommonHelper.Encrypt;
+using Nurse.Common.CM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,7 +18,35 @@ namespace WebStateCenter
             string strOp = context.Request.QueryString["op"];
             string strKey = context.Request.QueryString["key"];
             string strVal = context.Request.QueryString["val"];
+            string strEn = context.Request.QueryString["en"];
 
+            if (string.IsNullOrEmpty(strEn) && CommonConfig.IsEncrypt)
+            {
+                Return(context, "数据必须进行加密");
+                return;
+            }
+            else if (string.IsNullOrEmpty(strEn))
+            {
+                //直接继续
+            }
+            else
+            {
+                try
+                {
+                    //存在加密信息时，进行解密处理
+                    string strRaw = EncryptAESHelper.Decrypt(strEn, CommonConfig.EncryptKey);
+                    if (strRaw != (strOp + DateTime.Now.ToString("dd")))
+                    {
+                        Return(context, "密钥无法验证通过");
+                        return;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Return(context, "解密出错：" + ex.ToString());
+                    return;
+                }
+            }
 
 
             if (string.IsNullOrEmpty(strOp))

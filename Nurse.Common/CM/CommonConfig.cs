@@ -46,5 +46,17 @@ namespace Nurse.Common.CM
         /// 心跳配置
         /// </summary>
         public static string BeatAppName { get { return ConfigureHelper.GetConfigureValue("BeatAppName", ""); } }
+
+        /// <summary>
+        /// 是否加密
+        /// </summary>
+        public static bool IsEncrypt { get { return ConfigureHelper.GetConfigureBoolValue("IsEncrypt", false); } }
+
+        /// <summary>
+        /// 加密密码
+        /// </summary>
+        public static string EncryptKey { get { return ConfigureHelper.GetConfigureValue("EncryptKey", "AS4tv6jcIZ4F7MNMZpvH4Q=="); } }
+
+        
     }
 }

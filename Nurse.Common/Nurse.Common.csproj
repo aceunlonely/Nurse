@@ -61,6 +61,7 @@
     <Compile Include="helper\ConfigureHelper.cs" />
     <Compile Include="helper\DLog.cs" />
     <Compile Include="helper\EncodeHelper.cs" />
+    <Compile Include="helper\EncryptAESHelper.cs" />
     <Compile Include="helper\EncryptHelper.cs" />
     <Compile Include="helper\IDLog.cs" />
     <Compile Include="helper\MSMQHelper.cs" />

@@ -1,4 +1,5 @@
-﻿using Nurse.Common.CM;
+﻿using CommonHelper.Encrypt;
+using Nurse.Common.CM;
 using Nurse.Common.helper;
 using Nurse.Common.Interface;
 using System;
@@ -71,6 +72,10 @@ namespace Nurse.Common.Implements
                 string ekey = string.IsNullOrEmpty(key) ? "" : EncodeHelper.UrlEncode(key);
                 string eVal = string.IsNullOrEmpty(value) ? "" :   EncodeHelper.UrlEncode(value);
                 url = CommonConfig.WebStateCenterUrl + "?op=" + name + "&key=" + ekey + "&val=" + eVal;
+                if (CommonConfig.IsEncrypt)
+                {
+                    url = url + "&en=" + EncryptAESHelper.Encrypt((name + DateTime.Now.ToString("dd")), CommonConfig.EncryptKey);
+                }
                 Byte[] pageData = wc.DownloadData(url);
                 string result = Encoding.Default.GetString(pageData);  //如果获取网站页面采用的是GB2312，则使用这句 
                 return result;
