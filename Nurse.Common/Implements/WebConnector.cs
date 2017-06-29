@@ -74,7 +74,7 @@ namespace Nurse.Common.Implements
                 url = CommonConfig.WebStateCenterUrl + "?op=" + name + "&key=" + ekey + "&val=" + eVal;
                 if (CommonConfig.IsEncrypt)
                 {
-                    url = url + "&en=" + EncryptAESHelper.Encrypt((name + DateTime.Now.ToString("dd")), CommonConfig.EncryptKey);
+                    url = url + "&en=" + EncodeHelper.UrlEncode(EncryptAESHelper.Encrypt((name + DateTime.Now.ToString("dd")), CommonConfig.EncryptKey));
                 }
                 Byte[] pageData = wc.DownloadData(url);
                 string result = Encoding.Default.GetString(pageData);  //如果获取网站页面采用的是GB2312，则使用这句 
