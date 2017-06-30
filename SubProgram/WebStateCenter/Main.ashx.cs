@@ -79,7 +79,6 @@ namespace WebStateCenter
                         MainExe.SendMsg(strKey, strVal);
                         Return(context, "1");
                         break;
-
                     case "getMSMQConfig":
                         Return(context, MonitorExe.getMSMQConfig());
                         break;
