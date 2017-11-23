@@ -20,6 +20,23 @@ namespace WebStateCenter
             string strVal = context.Request.QueryString["val"];
             string strEn = context.Request.QueryString["en"];
 
+            if (string.IsNullOrEmpty(context.Request.Form["op"]) == false)
+            {
+                strOp = context.Request.Form["op"];
+            }
+            if (string.IsNullOrEmpty(context.Request.Form["key"]) == false)
+            {
+                strKey = context.Request.Form["key"];
+            }
+            if (string.IsNullOrEmpty(context.Request.Form["val"]) == false)
+            {
+                strVal = context.Request.Form["val"];
+            }
+            if (string.IsNullOrEmpty(context.Request.Form["en"]) == false)
+            {
+                strEn = context.Request.Form["en"];
+            }
+
             if (string.IsNullOrEmpty(strEn) && CommonConfig.IsEncrypt)
             {
                 Return(context, "数据必须进行加密");
@@ -79,6 +96,7 @@ namespace WebStateCenter
                         MainExe.SendMsg(strKey, strVal);
                         Return(context, "1");
                         break;
+
                     case "getMSMQConfig":
                         Return(context, MonitorExe.getMSMQConfig());
                         break;

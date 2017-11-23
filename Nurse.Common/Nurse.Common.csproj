@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="CM\CommonConfig.cs" />
     <Compile Include="CM\Enums.cs" />
+    <Compile Include="CM\YYJKConfig.cs" />
     <Compile Include="CommonLog.cs" />
     <Compile Include="DDD\ConfigCollection.cs" />
     <Compile Include="DDD\ConfigNode.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Implements\DiskConnector.cs" />
     <Compile Include="Implements\StateCenterConnectorFactory.cs" />
     <Compile Include="Implements\WebConnector.cs" />
+    <Compile Include="Implements\YYJKWebapiConnector.cs" />
     <Compile Include="Interface\IStateCenterConnector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

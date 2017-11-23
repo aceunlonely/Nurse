@@ -30,6 +30,86 @@ namespace Nurse.Test
 
             //TestWebConfig();
             //TestReadWebConfig();
+            //TestInvokeYYJKWebapi();
+        }
+
+        public void TestInvokeYYJKWebapi()
+        {
+            /* 
+                 * curl -i -X POST -H 'Content-Type:application/json' -d'{
+        "provider": "捷通科技",
+        "systemCode": "test",
+        "name": "aa",
+        "hostIp": "192.168.10.229",
+        "upTime": "2017-11-01 12:59:20",
+        "hostType":1,
+        "collectionItems": [
+            {
+                "itemKey": "文件大小",
+                "itemType": 1,
+                "itemUnit": 1,
+                "itemValue": "30m",
+                "collectionTime": "2017-01-01 01:12:22"
+            },
+            {
+                "itemKey": "目录大小",
+                "itemType": 1,
+                "itemUnit": 1,
+                "itemValue": "80",
+                "collectionTime": "2017-01-01 01:12:22"
+            },
+            {
+                "itemKey": "目录大小1",
+                "itemType": 1,
+                "itemUnit": 1,
+                "itemValue": "80",
+                "collectionTime": "2017-01-01 01:12:22"
+            }
+        ]
+    }'  http://192.168.12.11:28888/api/Collect  
+                 */
+            WebClient wc = new WebClient();
+            wc.Encoding = System.Text.Encoding.UTF8;
+            wc.Headers.Add(HttpRequestHeader.Accept, "json");
+            wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+
+            string postString = @"{
+        ""provider"": ""捷通科技"",
+        ""systemCode"": ""test"",
+        ""name"": ""aa"",
+        ""hostIp"": ""192.168.10.229"",
+        ""upTime"": ""2017-11-01 12:59:20"",
+        ""hostType"":1,
+        ""collectionItems"": [
+            {
+                ""itemKey"": ""文件大小"",
+                ""itemType"": 1,
+                ""itemUnit"": 1,
+                ""itemValue"": ""30m"",
+                ""collectionTime"": ""2017-01-01 01:12:22""
+            },
+            {
+                ""itemKey"": ""目录大小"",
+                ""itemType"": 1,
+                ""itemUnit"": 1,
+                ""itemValue"": ""80"",
+                ""collectionTime"": ""2017-01-01 01:12:22""
+            },
+            {
+                ""itemKey"": ""目录大小1"",
+                ""itemType"": 1,
+                ""itemUnit"": 1,
+                ""itemValue"": ""80"",
+                ""collectionTime"": ""2017-01-01 01:12:22""
+            }
+        ]
+    }";
+
+            byte[] postData = Encoding.UTF8.GetBytes(postString);
+            Byte[] pageData = wc.UploadData("http://192.168.12.11:28888/api/Collect", "POST", postData);//得到返回字符流 
+            string result = Encoding.UTF8.GetString(pageData);  //如果获取网站页面采用的是GB2312，则使用这句 
+
+
 
         }
 

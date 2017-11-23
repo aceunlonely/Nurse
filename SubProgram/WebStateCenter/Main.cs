@@ -66,6 +66,7 @@ namespace WebStateCenter
                     LinkState = IsAlved(key) ? "连接" : "断开"
                 });
             }
+            arrR = arrR.OrderBy(p => { return p.ServerMac; }).ThenBy(p => { return p.Name; }).ToList();
             return arrR;
         }
 

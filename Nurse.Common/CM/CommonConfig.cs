@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Nurse.Common.CM
 {
+    /// <summary>
+    /// 通用配置
+    /// </summary>
     public class CommonConfig
     {
         public static bool IsDebug { get { return ConfigureHelper.GetConfigureBoolValue("IsDebug", false); } }

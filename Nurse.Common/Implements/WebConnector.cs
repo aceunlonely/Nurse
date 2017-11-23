@@ -61,6 +61,11 @@ namespace Nurse.Common.Implements
 
         public string Promise(string name, string key, string value)
         {
+            //为了兼容之前的系统，对sendMonitorMsg 做特殊处理
+            if (name != null && name == "sendMonitorMsg")
+            {
+                return PromisePost(name, key, value);
+            }
             WebClient wc = new WebClient();
             string url = string.Empty;
             if (string.IsNullOrEmpty(CommonConfig.WebStateCenterUrl))
@@ -89,6 +94,43 @@ namespace Nurse.Common.Implements
             {
                 wc.Dispose();
             }
+        }
+
+        public string PromisePost(string name, string key, string value)
+        {
+
+            WebClient wc = new WebClient();
+            wc.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
+            string postString = string.Empty;
+            if (string.IsNullOrEmpty(CommonConfig.WebStateCenterUrl))
+            {
+                throw new Exception("未配置节点：WebStateCenterUrl");
+            }
+            try
+            {
+                string ekey = string.IsNullOrEmpty(key) ? "" : EncodeHelper.UrlEncode(key);
+                string eVal = string.IsNullOrEmpty(value) ? "" : EncodeHelper.UrlEncode(value);
+                postString = "op=" + name + "&key=" + ekey + "&val=" + eVal;
+                if (CommonConfig.IsEncrypt)
+                {
+                    postString = postString + "&en=" + EncodeHelper.UrlEncode(EncryptAESHelper.Encrypt((name + DateTime.Now.ToString("dd")), CommonConfig.EncryptKey));
+                }
+                byte[] postData = Encoding.UTF8.GetBytes(postString);
+
+                Byte[] pageData = wc.UploadData(CommonConfig.WebStateCenterUrl, "POST", postData);//得到返回字符流 
+                string result = Encoding.Default.GetString(pageData);  //如果获取网站页面采用的是GB2312，则使用这句 
+                return result;
+            }
+            catch (Exception ex)
+            {
+                CommonLog.InnerErrorLog.Error("访问站点出错:" + CommonConfig.WebStateCenterUrl + "  |" + ex.ToString());
+                return string.Empty;
+            }
+            finally
+            {
+                wc.Dispose();
+            }
+
         }
 
     }

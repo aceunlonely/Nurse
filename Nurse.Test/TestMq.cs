@@ -19,7 +19,7 @@ namespace Nurse.Test
         {
             //TestSend();
 
-            TestGetCount();
+            //TestGetCount();
             //TestAllCount();
             //TestConfig();
             //TestGet();

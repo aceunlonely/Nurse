@@ -100,10 +100,6 @@
       <Project>{06bdba72-2379-47f6-8c05-f73ae90a5c5a}</Project>
       <Name>Nurse.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Nurse.Slave\Nurse.Slave.csproj">
-      <Project>{37aaab05-e344-4ded-983a-2ea7392bd90f}</Project>
-      <Name>Nurse.Slave</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

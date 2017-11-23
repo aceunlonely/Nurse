@@ -60,9 +60,10 @@
     <Content Include="Config.aspx" />
     <Content Include="index.aspx" />
     <Content Include="Main.ashx" />
-    <None Include="map.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <Content Include="map.config" />
+    <Content Include="mq.config.demo">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
