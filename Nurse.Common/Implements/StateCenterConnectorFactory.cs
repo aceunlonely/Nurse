@@ -24,6 +24,8 @@ namespace Nurse.Common.Implements
                     return new WebConnector();
                 case "disk":
                     return new DiskConnector();
+                case "yyjk":
+                    return new YYJKWebapiConnector();
                 default:
                     CommonLog.InnerErrorLog.Error("配置存在问题，不支持的连接对象类型：" + connectorType);
                     break;

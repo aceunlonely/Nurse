@@ -70,9 +70,29 @@ V1.2.0
 	部署：
 		appsetting中添加节点
 			BeatAppName			：服务名 ，或者 EXE名 （随意）
+			BeatInternal		：心跳检测间隔
+			ConnectorType		：yyjk 需要配置成yyjk
 			YYJK_WebapiUrl		：yyjk webapi的地址
 			YYJK_Provider		：yyjk 应用提供者
 			YYJK_SystemCode		：yyjk配置的系统code
 			YYJK_MachineCode	：yyjk配置的机器标识
 			YYJK_CollectItemKey	：yyjk配置的采集项名  默认beat
 			YYJK_HostIp			：yyjk配置中的hostip  默认是本机hostip
+   可以通过这个命令验证：
+	curl -i -X POST -H 'Content-Type:application/json' -d'{
+    "provider": "捷通科技",
+    "systemCode": "test",
+    "name": "aa",
+    "hostIp": "192.168.10.229",
+    "upTime": "2017-11-01 12:59:20",
+    "hostType":1,
+    "collectionItems": [
+        {
+            "itemKey": "文件大小",
+            "itemType": 1,
+            "itemUnit": 1,
+            "itemValue": "30m",
+            "collectionTime": "2017-01-01 01:12:22"
+        }
+    ]
+}'  http://192.168.12.11:28888/api/Collect

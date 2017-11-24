@@ -86,14 +86,17 @@ namespace Nurse.Common.Implements
             {
                 byte[] postData = Encoding.UTF8.GetBytes(postString);
                 Byte[] pageData = wc.UploadData(YYJKConfig.YYJK_WebapiUrl, "POST", postData);
-                string result = Encoding.UTF8.GetString(pageData);  
+                string result = Encoding.UTF8.GetString(pageData);
 
                 if (result.IndexOf("true") > -1)
                 {
                     return true;
                 }
                 else
+                {
+                    CommonLog.InnerErrorLog.Error("出错:" + postString + " | " + result);
                     return false;
+                }
             }
             catch (Exception ex)
             {

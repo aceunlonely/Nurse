@@ -22,7 +22,7 @@ namespace Nurse.Test.Exe
             {
                 Console.WriteLine(i);
 
-                Thread.Sleep(1000);
+                Thread.Sleep(1800);
             }
         }
 
@@ -33,7 +33,7 @@ namespace Nurse.Test.Exe
                 BeatManager.Beat();
                 Console.WriteLine(i);
 
-                Thread.Sleep(1000);
+                Thread.Sleep(1800);
             }
         }
 
@@ -44,7 +44,7 @@ namespace Nurse.Test.Exe
             {
                 Console.WriteLine(i);
 
-                Thread.Sleep(1000);
+                Thread.Sleep(1800);
             }
         }
     }
