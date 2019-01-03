@@ -1,4 +1,5 @@
-﻿using Nurse.Common.helper;
+﻿using Nurse.Common.CM;
+using Nurse.Common.helper;
 using Nurse.Slave.CM;
 using System;
 using System.Collections.Generic;
@@ -25,14 +26,14 @@ namespace Nurse.Slave
             }
         }
 
-        private static DLog _log;
+        private static IDLog _log;
 
-        public static DLog Log {
+        public static IDLog Log {
             get
             {
                 if (_log == null)
                 {
-                    _log = new DLog();
+                    _log = new TinyLog();
                     _log.Init("SlaveLog","SlaveLog/log");
                 }
                 return _log;

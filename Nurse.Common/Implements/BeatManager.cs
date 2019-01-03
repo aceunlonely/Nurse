@@ -79,7 +79,7 @@ namespace Nurse.Common.Implements
         private static void Recycle()
         {
             // 创建自己的日志
-            DLog log = new DLog();
+            IDLog log = new TinyLog();
             log.Init("beat", "beat/log");
 
 

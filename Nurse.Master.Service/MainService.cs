@@ -20,7 +20,7 @@ namespace Nurse.Master.Service
     {
         public MainService()
         {
-            log = new DLog();
+            log = new TinyLog();
             log.Init("main", "main/log");
             InitializeComponent();
         }

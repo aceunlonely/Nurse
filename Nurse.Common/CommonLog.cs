@@ -1,4 +1,5 @@
-﻿using Nurse.Common.helper;
+﻿using Nurse.Common.CM;
+using Nurse.Common.helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +11,11 @@ namespace Nurse.Common
     public class CommonLog
     {
         private static object lock1 = new object();
-        private static DLog _innerErrorLog;
+        private static IDLog _innerErrorLog;
 
 
 
-        public static DLog InnerErrorLog
+        public static IDLog InnerErrorLog
         {
             get
             {
@@ -22,7 +23,7 @@ namespace Nurse.Common
                 {
                     if (_innerErrorLog == null)
                     {
-                        _innerErrorLog = new DLog();
+                        _innerErrorLog =  new TinyLog();
                         _innerErrorLog.Init("InnerErrorLog", "InnerErrorLog/log");
                     }
                     return _innerErrorLog;

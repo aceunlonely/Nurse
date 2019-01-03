@@ -32,9 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net">
-      <HintPath>..\lib\log4net.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -50,6 +47,7 @@
   <ItemGroup>
     <Compile Include="CM\CommonConfig.cs" />
     <Compile Include="CM\Enums.cs" />
+    <Compile Include="CM\TinyLog.cs" />
     <Compile Include="CM\YYJKConfig.cs" />
     <Compile Include="CommonLog.cs" />
     <Compile Include="DDD\ConfigCollection.cs" />
@@ -60,7 +58,6 @@
     <Compile Include="DDD\MSMQConfigNode.cs" />
     <Compile Include="helper\ComputerInfo.cs" />
     <Compile Include="helper\ConfigureHelper.cs" />
-    <Compile Include="helper\DLog.cs" />
     <Compile Include="helper\EncodeHelper.cs" />
     <Compile Include="helper\EncryptAESHelper.cs" />
     <Compile Include="helper\EncryptHelper.cs" />

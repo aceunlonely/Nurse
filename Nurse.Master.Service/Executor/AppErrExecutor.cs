@@ -14,8 +14,8 @@ namespace Nurse.Master.Service.Executor
 {
     public class AppErrExecutor
     {
-        private DLog _log;
-        public DLog Log
+        private IDLog _log;
+        public IDLog Log
         {
             get
             {

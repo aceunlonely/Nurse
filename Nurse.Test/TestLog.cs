@@ -1,4 +1,5 @@
-﻿using Nurse.Common.helper;
+﻿using Nurse.Common.CM;
+using Nurse.Common.helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace Nurse.Test
 
         public void writeLogSingle(object logName)
         {
-            DLog log = new DLog();
+            IDLog log = new TinyLog();
             log.Init(logName.ToString(), logName.ToString() + "/log");
 
             for (int i = 0; i < 10000; i++)

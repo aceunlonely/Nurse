@@ -44,7 +44,7 @@ namespace Nurse.Master.Service.Monitors
         private void RecycleGuard()
         {
             // 创建自己的日志
-            DLog log = new DLog();
+            IDLog log = new TinyLog();
             log.Init(_config.ID + "_" + _config.AppName, _config.ID + "_" + _config.AppName + "/log");
             int count1 = 0;
 
