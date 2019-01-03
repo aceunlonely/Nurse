@@ -1,5 +1,5 @@
-﻿using Dcjet.Framework.Helpers;
-using Nurse.Common.DDD;
+﻿using Nurse.Common.DDD;
+using Nurse.Common.Helpers;
 using System;
 using System.Collections.Generic;
 using System.IO;

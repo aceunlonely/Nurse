@@ -3,7 +3,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Dcjet.Framework.Helpers
+namespace Nurse.Common.Helpers
 {
     /// <summary>
     /// º”Ω‚√‹∞Ô÷˙¿‡

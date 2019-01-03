@@ -28,7 +28,7 @@ Nurse.Master.Service 部署说明：
 	nurse.config添加配置，用于配置监控的服务及处理策略（根据实际配置,配置说明参考nurse.config.demo）
 	mq.config 添加配置，用于mq通道深度监控（根据实际配置，配置说明参考mq.config.demo
 		其中ConfigDomain/Name 为主机配置别名，随意起名
-		ConfigDomain/Value为“192.168.10.228|WORKGROUP|administrator|dcjet@888”的加密字符串
+		ConfigDomain/Value为“192.168.10.228|WORKGROUP|administrator|xxx@888”的加密字符串
 					加密方式采用apollo的密码工具：PasswordTool.exe
 		MSMQConfigNode/Instance 为msmq的实例名，参考格式：highvertest\private$\tx1
 		MSMQConfigNode/Domain 对应ConfigDomain/Name，空值时，表明是本机的mq服务

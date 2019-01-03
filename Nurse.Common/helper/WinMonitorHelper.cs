@@ -1,6 +1,6 @@
-﻿using Dcjet.Framework.Helpers;
-using Nurse.Common.CM;
+﻿using Nurse.Common.CM;
 using Nurse.Common.DDD;
+using Nurse.Common.Helpers;
 using PerformanceReader;
 using System;
 using System.Collections.Generic;
@@ -36,7 +36,7 @@ namespace Nurse.Common.helper
                     {
                         //解密value
                         string value = EncryptHelper.DecryptDES(domain.Value);
-                        //"192.168.10.228|WORKGROUP|administrator|dcjet@888";
+                        //"192.168.10.228|WORKGROUP|administrator|xxx@888";
                         string[] strDomainInfos = value.Split(new char[] { '|' });
 
                         //本机ip不做处理

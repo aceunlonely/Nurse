@@ -1,6 +1,7 @@
-﻿using Dcjet.Framework.Helpers;
+﻿
 using Nurse.Common.DDD;
 using Nurse.Common.helper;
+using Nurse.Common.Helpers;
 using PerformanceReader;
 using System;
 using System.Collections.Generic;
@@ -106,7 +107,7 @@ namespace Nurse.Test
         public void TestConfig()
         {
             MSMQConfig mc = new MSMQConfig();
-            string msg = "192.168.10.181|WORKGROUP|yanfa|Dcjet@181";
+            string msg = "192.168.10.181|WORKGROUP|yanfa|xxxx@181";
             string strMsg = EncryptHelper.EncryptDES(msg);// "ESvKEYyK/iZYFW2Zj16BRvdWGjElI+j75K5CLvjfMKgeIl0pvMRcvXWKU/roIuQNV37DiFNdhErwk7YWtXuL7AIn8z+4V6NFHLTLkwn8XsatMhL5OSsvzwAupJuzhbuJEHOINdRDopQ=";
             mc.Domains = new List<ConfigDomain>();
             mc.Domains.Add(new ConfigDomain() { Name = "181", Value = strMsg });
